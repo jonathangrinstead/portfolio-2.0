@@ -3,6 +3,7 @@ import ColourMode from './components/ColourMode.vue'
 import TitleName from './components/TitleName.vue'
 import JobName from './components/JobName.vue'
 import AboutMeCard from './components/AboutMeCard.vue'
+import WeatherCard from './components/WeatherCard.vue'
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import AboutMeCard from './components/AboutMeCard.vue'
     </div>
     <div class="flex justify-between items-center p-6">
       <AboutMeCard />
+      <WeatherCard />
     </div>
   </div>
 </template>

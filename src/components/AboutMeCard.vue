@@ -10,7 +10,7 @@ import {
 </script>
 
 <template>
-  <Card>
+  <Card class="shadow-lg">
     <CardHeader class="flex justify-center">
       <img src="@/assets/memoji.png" alt="memoji" class="w-40 h-40">
     </CardHeader>
