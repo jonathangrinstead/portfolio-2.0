@@ -13,7 +13,7 @@ import {
       <p class="text-lg">Full Stack Software Developer</p>
     </HoverCardTrigger>
     <HoverCardContent>
-      <p>Full Stack Software Developer, specialising in Ruby on Rails and Vue.js</p>
+      <p>Specialising in Ruby on Rails, Python and Vue.js</p>
       <div class="flex items-center pt-2">
         <CalendarDays class="mr-2 h-4 w-4 opacity-70" />
         <span class="text-xs text-muted-foreground">
