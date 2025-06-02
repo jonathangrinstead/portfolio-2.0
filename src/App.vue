@@ -7,7 +7,7 @@ import WeatherCard from './components/WeatherCard.vue'
 </script>
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto mt-8">
     <div class="flex justify-between items-center p-6">
       <div class="flex flex-col gap-2">
         <TitleName />
