@@ -4,6 +4,7 @@ import TitleName from './components/TitleName.vue'
 import JobName from './components/JobName.vue'
 import AboutMeCard from './components/AboutMeCard.vue'
 import WeatherCard from './components/WeatherCard.vue'
+import LightSwitchCard from './components/LightSwitchCard.vue'
 </script>
 
 <template>
@@ -20,6 +21,7 @@ import WeatherCard from './components/WeatherCard.vue'
     <div class="flex justify-between items-center p-6">
       <AboutMeCard />
       <WeatherCard />
+      <LightSwitchCard />
     </div>
   </div>
 </template>
