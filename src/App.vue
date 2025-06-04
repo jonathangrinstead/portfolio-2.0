@@ -6,6 +6,7 @@ import AboutMeCard from './components/AboutMeCard.vue'
 import WeatherCard from './components/WeatherCard.vue'
 import LightSwitchCard from './components/LightSwitchCard.vue'
 import SnakeCard from './components/SnakeCard.vue'
+import TechStackCard from './components/TechStackCard.vue'
 </script>
 
 <template>
@@ -24,6 +25,9 @@ import SnakeCard from './components/SnakeCard.vue'
       <WeatherCard />
       <LightSwitchCard />
       <SnakeCard />
+    </div>
+    <div class="flex justify-between items-center p-6">
+      <TechStackCard />
     </div>
   </div>
 </template>
