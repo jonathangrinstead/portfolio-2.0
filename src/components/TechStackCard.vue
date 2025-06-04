@@ -21,11 +21,29 @@
             :class="{ 'z-10': index === 1, 'z-0': index !== 1 }"
             :style="cardStyle(index)"
           >
-            <img :src="card.icon" class="w-6 h-6 absolute top-4 left-4" :alt="card.name + ' icon'" />
+            <!-- Top left: First letter + icon -->
+            <div class="absolute top-2 left-2 flex flex-col items-center">
+              <span class="text-xs font-bold mb-1" :style="{ color: card.color }">
+                {{ card.name.charAt(0).toUpperCase() }}
+              </span>
+              <img :src="card.icon" class="w-4 h-4" :alt="card.name + ' icon'" />
+            </div>
+            
+            <!-- Top right: icon only -->
             <img :src="card.icon" class="w-6 h-6 absolute top-4 right-4" :alt="card.name + ' icon'" />
+            
+            <!-- Bottom left: icon only -->
             <img :src="card.icon" class="w-6 h-6 absolute bottom-4 left-4" :alt="card.name + ' icon'" />
-            <img :src="card.icon" class="w-6 h-6 absolute bottom-4 right-4" :alt="card.name + ' icon'" />
-  
+            
+            <!-- Bottom right: First letter + icon (upside down) -->
+            <div class="absolute bottom-2 right-2 flex flex-col items-center transform rotate-180">
+              <span class="text-xs font-bold mb-1" :style="{ color: card.color }">
+                {{ card.name.charAt(0).toUpperCase() }}
+              </span>
+              <img :src="card.icon" class="w-4 h-4" :alt="card.name + ' icon'" />
+            </div>
+
+            <!-- Center content -->
             <img :src="card.icon" :alt="card.name" class="w-16 h-16 mb-4" />
             <h2 class="text-2xl font-bold" :style="{ color: card.color }">{{ card.name }}</h2>
           </div>
