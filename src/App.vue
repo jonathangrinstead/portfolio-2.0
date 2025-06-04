@@ -5,6 +5,7 @@ import JobName from './components/JobName.vue'
 import AboutMeCard from './components/AboutMeCard.vue'
 import WeatherCard from './components/WeatherCard.vue'
 import LightSwitchCard from './components/LightSwitchCard.vue'
+import SnakeCard from './components/SnakeCard.vue'
 </script>
 
 <template>
@@ -22,6 +23,7 @@ import LightSwitchCard from './components/LightSwitchCard.vue'
       <AboutMeCard />
       <WeatherCard />
       <LightSwitchCard />
+      <SnakeCard />
     </div>
   </div>
 </template>
