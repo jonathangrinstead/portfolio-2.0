@@ -28,3 +28,10 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+app.get('/api/quotes', (_req, res) => {
+  const quotes = require('./quotes.json');
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  res.json(quotes[randomIndex]);
+});
