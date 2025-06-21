@@ -1,16 +1,16 @@
 <template>
-    <Card class="w-full max-w-md mx-auto p-0 overflow-hidden relative h-[300px] shadow-lg">
-      <div v-if="!started && !gameOver" class="w-full h-full flex flex-col items-center justify-center bg-card text-foreground font-mono text-center">
-        <h1 class="text-4xl mb-2">SNAKE</h1>
+    <Card class="glass-card w-full max-w-md mx-auto p-0 overflow-hidden relative h-[300px]">
+      <div v-if="!started && !gameOver" class="w-full h-full flex flex-col items-center justify-center text-foreground text-center">
+        <h1 class="text-4xl mb-2 font-bold">SNAKE</h1>
         <p class="text-sm mb-4">High Score: {{ highScore }}</p>
         <Button @click="startGame" class="bg-primary text-primary-foreground hover:bg-primary/80">Play</Button>
       </div>
   
-      <div v-if="gameOver" class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white font-mono text-center">
-        <h1 class="text-4xl mb-2 animate-pulse">Game Over</h1>
+      <div v-if="gameOver" class="w-full h-full flex flex-col items-center justify-center text-foreground text-center">
+        <h1 class="text-4xl mb-2 animate-pulse font-bold">Game Over</h1>
         <p class="text-sm mb-2">Score: {{ score }}</p>
         <p class="text-sm mb-4">High Score: {{ highScore }}</p>
-        <Button @click="resetGame" class="bg-white text-black hover:bg-gray-200">Try Again</Button>
+        <Button @click="resetGame" class="bg-primary text-primary-foreground hover:bg-primary/80">Try Again</Button>
       </div>
   
       <canvas
@@ -18,12 +18,12 @@
         ref="canvas"
         width="300"
         height="300"
-        class="block w-full h-full bg-card text-foreground"
+        class="block w-full h-full"
       />
   
       <div
         v-if="started"
-        class="absolute top-2 left-2 text-xs bg-primary text-primary-foreground px-2 py-1 rounded shadow"
+        class="absolute top-2 left-2 text-xs bg-primary/80 backdrop-blur-sm text-primary-foreground px-2 py-1 rounded shadow"
       >
         Score: {{ score }}
       </div>
@@ -49,8 +49,8 @@
   const draw = () => {
     if (!ctx.value) return
   
-    ctx.value.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--card').trim() || '#fff'
-    ctx.value.fillRect(0, 0, 300, 300)
+    // Clear canvas with transparent background
+    ctx.value.clearRect(0, 0, 300, 300)
   
     ctx.value.fillStyle = '#8b5cf6' // Snake color (purple)
     snake.value.forEach((segment) => {

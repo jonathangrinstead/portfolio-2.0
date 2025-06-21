@@ -1,6 +1,6 @@
 <template>
     <Card
-      class="w-full max-w-md h-[420px] mx-auto p-6 flex flex-col items-center justify-center overflow-hidden select-none relative transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+      class="glass-card w-full max-w-md h-[420px] mx-auto p-6 flex flex-col items-center justify-center overflow-hidden select-none relative transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
     >
       <!-- Card View -->
       <div
