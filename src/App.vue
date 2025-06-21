@@ -10,6 +10,7 @@ import TechStackCard from './components/TechStackCard.vue'
 import QuotesCard from './components/QuotesCard.vue'
 import LinkedinCard from './components/LinkedinCard.vue'
 import GitHubCard from './components/GitHubCard.vue'
+import CVCard from './components/CVCard.vue'
 import { useLiquidGlass } from './composables/useLiquidGlass'
 
 // Initialize liquid glass cursor tracking
@@ -40,6 +41,9 @@ useLiquidGlass()
     <div class="flex justify-between items-center p-6">
       <LinkedinCard />
       <GitHubCard />
+    </div>
+    <div class="flex justify-between items-center p-6">
+      <CVCard />
     </div>
   </div>
 </template>
