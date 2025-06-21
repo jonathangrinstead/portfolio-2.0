@@ -92,7 +92,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Card class="shadow-lg">
+  <Card class="glass-card shadow-lg">
     <CardHeader>
       <CardTitle class="flex items-center justify-between">
         <span>London</span>

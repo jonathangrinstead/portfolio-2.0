@@ -8,6 +8,10 @@ import LightSwitchCard from './components/LightSwitchCard.vue'
 import SnakeCard from './components/SnakeCard.vue'
 import TechStackCard from './components/TechStackCard.vue'
 import QuotesCard from './components/QuotesCard.vue'
+import { useLiquidGlass } from './composables/useLiquidGlass'
+
+// Initialize liquid glass cursor tracking
+useLiquidGlass()
 </script>
 
 <template>

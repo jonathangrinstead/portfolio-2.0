@@ -2,15 +2,12 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card'
 </script>
 
 <template>
-  <Card class="shadow-lg">
+  <Card class="glass-card shadow-lg">
     <CardHeader class="flex justify-center">
       <img src="@/assets/memoji.png" alt="memoji" class="w-40 h-40">
     </CardHeader>

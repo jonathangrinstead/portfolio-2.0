@@ -113,6 +113,114 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.glass-card {
+  position: relative;
+  background: transparent !important;
+  backdrop-filter: blur(20px) saturate(110%);
+  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.dark .glass-card {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+/* Subtle Cursor-Reactive Frosted Effect */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at var(--cursor-x) var(--cursor-y), rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Minimal Frosted Border Effect */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+/* Subtle Hover Effects - Frosted Glass */
+.glass-card:hover {
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Subtle cursor reactivity on hover - Light mode with blue/purple refraction */
+.glass-card:hover::before {
+  opacity: 0.4;
+  background: 
+    radial-gradient(circle at var(--cursor-x) var(--cursor-y), 
+      rgba(59, 130, 246, 0.25) 0%,
+      rgba(139, 92, 246, 0.18) 20%, 
+      rgba(255, 255, 255, 0.12) 35%,
+      transparent 50%);
+  transition: opacity 0.2s ease;
+}
+
+/* Dark mode with matching spread and intensity */
+.dark .glass-card:hover::before {
+  opacity: 0.4;
+  background: 
+    radial-gradient(circle at var(--cursor-x) var(--cursor-y), 
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.18) 20%, 
+      rgba(255, 255, 255, 0.12) 35%,
+      transparent 50%);
+}
+
+.glass-card:hover::after {
+  opacity: 0.6;
+}
+
+/* Cursor-Reactive Liquid Glass */
+.glass-card {
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+}
+
+/* Enhanced Frosted Glass Variant (Optional) */
+.glass-card.frosted-enhanced {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-card.frosted-enhanced {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
