@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const Nodefetch = require('node-fetch');
+const mapboxgl = require('mapbox-gl');
 
 dotenv.config({ path: '.env' });
 
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY;
 
 app.get('/api/weather', async (req, res) => {
   try {
