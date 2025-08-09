@@ -1,6 +1,35 @@
 <template>
-    <div class="w-[300px] h-[300px] shadow-lg overflow-hidden rounded-2xl" id="map">
+    <div class="w-[300px] h-[300px] shadow-lg overflow-hidden rounded-2xl relative" id="map">
+        <!-- Zoom Controls -->
+        <!-- Plus (bottom-right) -->
+        <div class="absolute bottom-3 right-3 z-10 pointer-events-auto">
+            <button
+                aria-label="Zoom in"
+                @click="handleZoomIn"
+                class="w-10 h-10 rounded-full border-2 flex items-center justify-center transition-colors leading-none shadow-md backdrop-blur-sm
+                       bg-white/90 text-black border-white/80 hover:bg-white
+                       dark:bg-black/60 dark:text-white dark:border-white/40 dark:hover:bg-black/70"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
 
+        <!-- Minus (bottom-left) -->
+        <div class="absolute bottom-3 left-3 z-10 pointer-events-auto">
+            <button
+                aria-label="Zoom out"
+                @click="handleZoomOut"
+                class="w-10 h-10 rounded-full border-2 flex items-center justify-center transition-colors leading-none shadow-md backdrop-blur-sm
+                       bg-white/90 text-black border-white/80 hover:bg-white
+                       dark:bg-black/60 dark:text-white dark:border-white/40 dark:hover:bg-black/70"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true">
+                    <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -63,6 +92,24 @@ const addMarkersToMap = () => {
     console.log('Marker added at coordinates:', trafalgarSquare);
 };
 
+const handleZoomIn = () => {
+    if (!map) return;
+    map.easeTo({
+        zoom: map.getZoom() + 1,
+        duration: 300,
+        center: trafalgarSquare as mapboxgl.LngLatLike,
+    });
+};
+
+const handleZoomOut = () => {
+    if (!map) return;
+    map.easeTo({
+        zoom: map.getZoom() - 1,
+        duration: 300,
+        center: trafalgarSquare as mapboxgl.LngLatLike,
+    });
+};
+
 onMounted(async () => {
     await nextTick();
     
@@ -74,6 +121,7 @@ onMounted(async () => {
         style: initialStyle,
         attributionControl: false,
         logoPosition: 'bottom-left',
+        interactive: false,
         center: [trafalgarSquare[0], trafalgarSquare[1]], // Set initial center
         zoom: 13 // Set initial zoom
     });
@@ -99,30 +147,30 @@ onMounted(async () => {
 });
 </script>
 <style scoped>
-/* Hide all Mapbox controls and attribution */
-#map.mapboxgl-ctrl-bottom-right,
-.mapboxgl-ctrl-bottom-left,
-.mapboxgl-ctrl-top-right,
-.mapboxgl-ctrl-top-left,
-.mapboxgl-ctrl-group,
-.mapboxgl-ctrl,
-.mapboxgl-ctrl-attrib,
-.mapboxgl-ctrl-logo {
+/* Hide all Mapbox controls and attribution within this component */
+:deep(#map .mapboxgl-ctrl-bottom-right),
+:deep(#map .mapboxgl-ctrl-bottom-left),
+:deep(#map .mapboxgl-ctrl-top-right),
+:deep(#map .mapboxgl-ctrl-top-left),
+:deep(#map .mapboxgl-ctrl-group),
+:deep(#map .mapboxgl-ctrl),
+:deep(#map .mapboxgl-ctrl-attrib),
+:deep(#map .mapboxgl-ctrl-logo),
+:deep(#map .mapboxgl-ctrl-attrib-inner),
+:deep(#map .mapboxgl-ctrl-attrib-button) {
     display: none !important;
 }
 
-#map .mapboxgl-ctrl{
-    display: none !important;
-}
-
-/* Hide any remaining attribution elements */
-.mapboxgl-ctrl-attrib-inner,
-.mapboxgl-ctrl-attrib-button {
-    display: none !important;
-}
-
-/* Apply border radius to map container and all Mapbox elements */
 /* Ensure the internal canvas cannot overflow the container */
 #map { position: relative; }
-#map .mapboxgl-canvas { position: absolute; inset: 0; }
+#map :deep(.mapboxgl-canvas) { position: absolute; inset: 0; }
 </style>  
+<style>
+/* Global to ensure Mapbox logo/attribution are hidden even across re-renders */
+#map .mapboxgl-ctrl-logo,
+#map .mapboxgl-ctrl-attrib,
+#map .mapboxgl-ctrl-attrib-inner,
+#map .mapboxgl-ctrl-attrib-button {
+  display: none !important;
+}
+</style>
