@@ -1,5 +1,5 @@
 <template>
-    <Card class="glass-card flex flex-col relative w-[300px] h-[300px]">
+    <Card class="glass-card flex flex-col relative w-full h-full">
         <a href="/Jonathan Grinstead CV(2025).pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center h-full">
             <span class="text-2xl font-serif italic">Curriculum Vitae</span>
         </a>

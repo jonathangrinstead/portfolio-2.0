@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[300px] h-[300px] shadow-lg overflow-hidden rounded-2xl relative" id="map">
+    <div class="w-full h-full shadow-lg overflow-hidden rounded-2xl relative" id="map">
         <!-- Zoom Controls -->
         <!-- Plus (bottom-right) -->
         <div class="absolute bottom-3 right-3 z-10 pointer-events-auto">
@@ -33,7 +33,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, nextTick, watch } from 'vue';
+import { onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { useColorMode } from '@vueuse/core';
 import mapboxgl from 'mapbox-gl';
 import memojiFavi from '@/assets/memoji_favi.png';
@@ -43,6 +43,7 @@ const lightStyle = 'mapbox://styles/jonathangrinstead1997/cmdagm7j1007501r1ajpa5
 const darkStyle = 'mapbox://styles/jonathangrinstead1997/cmdagjf5v04sq01sd0hrq4t58';
 
 let map: mapboxgl.Map | null = null;
+let resizeObserver: ResizeObserver | null = null;
 const mode = useColorMode();
 
 // Trafalgar Square coordinates
@@ -144,6 +145,22 @@ onMounted(async () => {
     watch(mode, () => {
         updateMapStyle();
     });
+
+    // Observe container resize to keep Mapbox canvas sized correctly
+    const container = document.getElementById('map');
+    if (container) {
+        resizeObserver = new ResizeObserver(() => {
+            map && map.resize();
+        });
+        resizeObserver.observe(container);
+    }
+});
+
+onUnmounted(() => {
+    if (resizeObserver) {
+        resizeObserver.disconnect();
+        resizeObserver = null;
+    }
 });
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-    <Card class="glass-card h-[300px] w-[400px] flex flex-col relative">
+    <Card class="glass-card w-full h-full flex flex-col relative">
         <!-- Refresh button in top-right corner -->
         <button 
             class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 z-10 cursor-pointer"
