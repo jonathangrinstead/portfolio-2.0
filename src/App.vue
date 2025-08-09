@@ -13,6 +13,7 @@ import GitHubCard from './components/GitHubCard.vue'
 import CVCard from './components/CVCard.vue'
 import SpotifyCard from './components/SpotifyCard.vue'
 import MapCard from './components/MapCard.vue'
+import ProjectCard from './components/ProjectCard.vue'
 import { useLiquidGlass } from './composables/useLiquidGlass'
 
 // Initialize liquid glass cursor tracking
@@ -50,6 +51,7 @@ useLiquidGlass()
     </div>
     <div class="flex justify-between items-center p-6">
       <MapCard />
+      <ProjectCard />
     </div>
   </div>
 </template>
