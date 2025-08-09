@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ColourMode from './components/ColourMode.vue'
+import Contact from './components/Contact.vue'
 import TitleName from './components/TitleName.vue'
 import JobName from './components/JobName.vue'
 import AboutMeCard from './components/AboutMeCard.vue'
@@ -27,7 +27,7 @@ useLiquidGlass()
         <JobName />
       </div>
       <div class='pb-4'>
-        <ColourMode />
+        <Contact />
       </div>
     </div>
     <div class="flex justify-between items-center p-6">
