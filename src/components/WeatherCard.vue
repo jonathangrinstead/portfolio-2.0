@@ -2,8 +2,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ref, onMounted, computed } from 'vue'
 
+type WeatherApi = {
+  weather: { id: number; description: string }[]
+  main: { temp: number; feels_like: number; humidity: number }
+  wind: { speed: number }
+}
+
 // Import all weather icons
-const weatherIcons = {
+const weatherIcons: Record<string, string> = {
   // Clear
   '800': new URL('@/assets/weatherIcons/clear-day.svg', import.meta.url).href,
   // Clouds
@@ -68,9 +74,9 @@ const weatherIcons = {
   '781': new URL('@/assets/weatherIcons/tornado.svg', import.meta.url).href,
 }
 
-const weatherData = ref(null)
+const weatherData = ref<WeatherApi | null>(null)
 
-const currentWeatherIcon = computed(() => {
+const currentWeatherIcon = computed<string>(() => {
   if (!weatherData.value) return new URL('@/assets/weatherIcons/cloudy.svg', import.meta.url).href
   const weatherCode = weatherData.value.weather[0].id.toString()
   return weatherIcons[weatherCode] || new URL('@/assets/weatherIcons/cloudy.svg', import.meta.url).href

@@ -1,6 +1,6 @@
 <template>
   <Dialog>
-    <DialogTrigger class="block w-[300px] h-[300px]">
+    <DialogTrigger class="block w-full h-full">
       <Card class="glass-card relative w-full h-full overflow-hidden">
         <div class="absolute top-4 left-4">
           <CardDescription class="text-base">Project</CardDescription>

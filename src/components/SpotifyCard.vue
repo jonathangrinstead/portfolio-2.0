@@ -1,5 +1,5 @@
 <template>
-    <Card class="glass-card flex flex-col relative w-[300px] h-[300px] overflow-hidden">
+    <Card class="glass-card flex flex-col relative w-full h-full overflow-hidden">
         <div class="flex flex-col h-full">
             <!-- Loading state -->
             <div v-if="isFetching" class="flex flex-col items-center justify-center flex-1 p-4">

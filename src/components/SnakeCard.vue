@@ -1,5 +1,5 @@
 <template>
-    <Card class="glass-card w-full max-w-md mx-auto p-0 overflow-hidden relative h-[300px]">
+    <Card class="glass-card w-full h-full p-0 overflow-hidden relative">
       <div v-if="!started && !gameOver" class="w-full h-full flex flex-col items-center justify-center text-foreground text-center">
         <h1 class="text-4xl mb-2 font-bold">SNAKE</h1>
         <p class="text-sm mb-4">High Score: {{ highScore }}</p>
@@ -31,7 +31,7 @@
   </template>
   
   <script setup lang="ts">
-  import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+  import { ref, onUnmounted, nextTick } from 'vue'
   import { Card } from '@/components/ui/card'
   import { Button } from '@/components/ui/button'
   
