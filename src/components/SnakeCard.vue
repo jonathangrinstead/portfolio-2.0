@@ -3,14 +3,34 @@
       <div v-if="!started && !gameOver" class="w-full h-full flex flex-col items-center justify-center text-foreground text-center">
         <h1 class="text-4xl mb-2 font-bold">SNAKE</h1>
         <p class="text-sm mb-4">High Score: {{ highScore }}</p>
-        <Button @click="startGame" class="bg-primary text-primary-foreground hover:bg-primary/80">Play</Button>
+        <button
+          @click="startGame"
+          aria-label="Play Snake"
+          class="pl-3 pr-4 py-2 rounded-full border backdrop-blur shadow-md transition-all duration-300 flex items-center gap-2
+                 bg-white/80 text-black border-white/60 hover:bg-white hover:scale-105
+                 focus:outline-none focus:ring-2 focus:ring-black/20
+                 dark:bg-black/60 dark:text-white dark:border-white/30 dark:hover:bg-black/70 dark:focus:ring-white/20"
+        >
+          <Play class="w-4 h-4" />
+          <span class="text-sm font-medium">Play</span>
+        </button>
       </div>
   
       <div v-if="gameOver" class="w-full h-full flex flex-col items-center justify-center text-foreground text-center">
         <h1 class="text-4xl mb-2 animate-pulse font-bold">Game Over</h1>
         <p class="text-sm mb-2">Score: {{ score }}</p>
         <p class="text-sm mb-4">High Score: {{ highScore }}</p>
-        <Button @click="resetGame" class="bg-primary text-primary-foreground hover:bg-primary/80">Try Again</Button>
+        <button
+          @click="resetGame"
+          aria-label="Try again"
+          class="pl-3 pr-4 py-2 rounded-full border backdrop-blur shadow-md transition-all duration-300 flex items-center gap-2
+                 bg-white/80 text-black border-white/60 hover:bg-white hover:scale-105
+                 focus:outline-none focus:ring-2 focus:ring-black/20
+                 dark:bg-black/60 dark:text-white dark:border-white/30 dark:hover:bg-black/70 dark:focus:ring-white/20"
+        >
+          <RotateCcw class="w-4 h-4" />
+          <span class="text-sm font-medium">Try Again</span>
+        </button>
       </div>
   
       <canvas
@@ -33,7 +53,7 @@
   <script setup lang="ts">
   import { ref, onUnmounted, nextTick } from 'vue'
   import { Card } from '@/components/ui/card'
-  import { Button } from '@/components/ui/button'
+  import { Play, RotateCcw } from 'lucide-vue-next'
   
   const canvas = ref<HTMLCanvasElement | null>(null)
   const ctx = ref<CanvasRenderingContext2D | null>(null)

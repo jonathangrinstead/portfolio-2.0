@@ -15,10 +15,18 @@ const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY;
 
 app.get('/api/weather', async (req, res) => {
   try {
-    const city = req.query.city || 'London';
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}`
-    );
+    const { city, lat, lon } = req.query as { city?: string; lat?: string; lon?: string };
+
+    // Prefer coordinates if provided, otherwise fall back to city (default London)
+    let url: string;
+    if (lat && lon) {
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&appid=${WEATHER_API_KEY}`;
+    } else {
+      const safeCity = city || 'London';
+      url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(safeCity)}&appid=${WEATHER_API_KEY}`;
+    }
+
+    const response = await fetch(url);
     const data = await response.json();
     res.json(data);
   } catch (error) {
