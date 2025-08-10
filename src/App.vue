@@ -105,7 +105,7 @@ function setGridDragLocked(locked: boolean) {
           item.i === 'map' ? MapCard :
           ProjectCard
         " 
-        v-on="item.i === 'tech' ? { 'lock-grid-drag': setGridDragLocked } : {}"/>
+        v-on="(item.i === 'tech' || item.i === 'light') ? { 'lock-grid-drag': setGridDragLocked } : {}"/>
       </grid-item>
     </grid-layout>
   </div>
