@@ -22,20 +22,24 @@ import { ref } from 'vue'
 useLiquidGlass()
 
 const layout = ref([
-  { x: 0,  y: 0,  w: 4, h: 3, i: 'about' },
-  { x: 4,  y: 0,  w: 3, h: 3, i: 'weather' },
-  { x: 7,  y: 0,  w: 2, h: 3, i: 'light' },
-  { x: 9,  y: 0,  w: 3, h: 3, i: 'snake' },
+  // Top row widths remain equal; increase vertical room for About and Light
+  { x: 0,  y: 0,  w: 3, h: 3, i: 'about' },
+  { x: 3,  y: 0,  w: 3, h: 3, i: 'weather' },
+  { x: 6,  y: 0,  w: 3, h: 3, i: 'light' },
+  { x: 9,  y: 0,  w: 3, h: 3, i: 'map' },
 
+  // Second row starts at y:3 to align below top row
   { x: 0,  y: 3,  w: 6, h: 4, i: 'tech' },
   { x: 6,  y: 3,  w: 6, h: 4, i: 'quotes' },
 
+  // Third row
   { x: 0,  y: 7,  w: 3, h: 3, i: 'linkedin' },
   { x: 3,  y: 7,  w: 3, h: 3, i: 'github' },
   { x: 6,  y: 7,  w: 3, h: 3, i: 'cv' },
   { x: 9,  y: 7,  w: 3, h: 3, i: 'spotify' },
 
-  { x: 0,  y: 10, w: 7, h: 6, i: 'map' },
+  // Bottom large: Snake (shifted accordingly)
+  { x: 0,  y: 10, w: 7, h: 6, i: 'snake' },
   { x: 7,  y: 10, w: 5, h: 6, i: 'project' },
 ])
 

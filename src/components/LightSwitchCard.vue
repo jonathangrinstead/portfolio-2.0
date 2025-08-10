@@ -10,7 +10,7 @@ const toggleMode = () => {
 </script>
 
 <template>
-    <Card class="glass-card flex items-center justify-center p-16 shadow-lg">
+    <Card class="h-full glass-card flex items-center justify-center p-16 shadow-lg">
       <!-- Clickable Bulb -->
       <div
         class="w-24 h-24 rounded-full flex items-center justify-center border-4 cursor-pointer transition-all duration-500"

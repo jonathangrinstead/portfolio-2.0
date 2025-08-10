@@ -7,11 +7,11 @@ import {
 </script>
 
 <template>
-  <Card class="glass-card shadow-lg">
-    <CardHeader class="flex justify-center">
-      <img src="@/assets/memoji.png" alt="memoji" class="w-40 h-40">
+  <Card class="glass-card shadow-lg h-full gap-1">
+    <CardHeader class="flex justify-center pb-0">
+      <img src="@/assets/memoji.png" alt="memoji" class="w-28 h-28">
     </CardHeader>
-    <CardContent>
+    <CardContent class="pt-0 -mt-3">
       <p class="text-sm text-center max-w-md mx-auto leading-relaxed">
         Hey i'm <span class="text-primary">Jonathan</span>, a full stack software developer from the UK. Im interested in building intuitive web applications, music, photography and travel.
       </p>
