@@ -4,20 +4,20 @@
     >
       <!-- Card View -->
       <div
-        class="relative w-72 h-96 cursor-grab transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
-        @mousedown="startDrag"
-        @mousemove="onDrag"
-        @mouseup="endDrag"
-        @mouseleave="endDrag"
-        @touchstart="startTouch"
-        @touchmove="onTouch"
-        @touchend="endTouch"
+        class="relative w-72 h-96 cursor-grab transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] techstack-swipe"
+        @mousedown.stop.prevent="startDrag"
+        @mousemove.stop.prevent="onDrag"
+        @mouseup.stop="endDrag"
+        @mouseleave.stop="endDrag"
+        @touchstart.stop.prevent="startTouch"
+        @touchmove.stop.prevent="onTouch"
+        @touchend.stop="endTouch"
       >
         <TransitionGroup name="slide" tag="div" class="absolute inset-0">
           <div
             v-for="(card, index) in visibleCards"
             :key="card.name"
-            class="absolute w-full h-full flex flex-col items-center justify-center text-center border rounded-xl shadow-lg p-4 bg-card text-foreground transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+            class="absolute w-full h-full flex flex-col items-center justify-center text-center border rounded-[2rem] shadow-lg p-4 bg-card text-foreground transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
             :class="{ 'z-10': index === 1, 'z-0': index !== 1 }"
             :style="cardStyle(index)"
           >
@@ -53,8 +53,12 @@
   </template>
   
   <script setup lang="ts">
-  import { ref, computed } from 'vue'
+import { ref, computed } from 'vue'
   import { Card } from '@/components/ui/card'
+
+const emit = defineEmits<{
+  (e: 'lock-grid-drag', locked: boolean): void
+}>()
   
   const cards = [
     { name: 'Ruby', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg', color: '#CC342D' },
@@ -104,6 +108,7 @@
   // Mouse events
   function startDrag(e: MouseEvent) {
     dragStart.value = e.clientX
+    emit('lock-grid-drag', true)
   }
   
   function onDrag(e: MouseEvent) {
@@ -122,11 +127,13 @@
     }
     dragOffset.value = 0
     dragStart.value = null
+    emit('lock-grid-drag', false)
   }
   
   // Touch events for mobile
   function startTouch(e: TouchEvent) {
     touchStart.value = e.touches[0].clientX
+    emit('lock-grid-drag', true)
   }
   
   function onTouch(e: TouchEvent) {
@@ -146,6 +153,7 @@
     }
     dragOffset.value = 0
     touchStart.value = null
+    emit('lock-grid-drag', false)
   }
   </script>
   

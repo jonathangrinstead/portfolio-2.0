@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full shadow-lg overflow-hidden rounded-2xl relative" id="map">
+    <div class="w-full h-full shadow-lg overflow-hidden rounded-[2rem] relative" id="map">
         <!-- Zoom Controls -->
         <!-- Plus (bottom-right) -->
         <div class="absolute bottom-3 right-3 z-10 pointer-events-auto">
