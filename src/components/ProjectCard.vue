@@ -27,17 +27,31 @@
         </button>
       </DialogTrigger>
     </Card>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>ACL-Insight</DialogTitle>
-        <DialogDescription>Coming soon...</DialogDescription>
-      </DialogHeader>
+    <DialogContent class="project-expand" :hide-close="true">
+      <div class="relative w-full h-full">
+        <!-- Centered close button -->
+        <div class="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+          <DialogClose as-child>
+            <Button variant="outline" size="icon" class="rounded-full w-10 h-10 shadow-md backdrop-blur cursor-pointer p-0">
+              <X class="w-5 h-5" />
+              <span class="sr-only">Close</span>
+            </Button>
+          </DialogClose>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col items-center justify-center w-full h-full gap-3 p-6 text-center">
+          <h2 class="text-3xl font-semibold">ACL-Insight</h2>
+          <p class="text-muted-foreground">Coming soon...</p>
+        </div>
+      </div>
     </DialogContent>
   </Dialog>
 </template>
 
 <script setup lang="ts">
-import { Brain, Maximize2 } from 'lucide-vue-next'
+import { Brain, Maximize2, X } from 'lucide-vue-next'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
 </script>

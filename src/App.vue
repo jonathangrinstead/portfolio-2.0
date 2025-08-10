@@ -47,6 +47,12 @@ const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }
 const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
 const rowHeight = 80
 const margin: [number, number] = [16, 16]
+
+const isGridDragLocked = ref(false)
+
+function setGridDragLocked(locked: boolean) {
+  isGridDragLocked.value = locked
+}
 </script>
 
 <template>
@@ -65,16 +71,26 @@ const margin: [number, number] = [16, 16]
       v-model:layout="layout"
       :col-num="cols.lg"
       :row-height="rowHeight"
-      :is-draggable="true"
+      :is-draggable="!isGridDragLocked"
       :is-resizable="false"
       :responsive="true"
+      draggable-cancel=".techstack-swipe"
       :breakpoints="breakpoints"
       :cols="cols"
       :margin="margin"
       :use-css-transforms="true"
       class="px-6"
     >
-      <grid-item v-for="item in layout" :key="item.i" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i">
+      <grid-item
+        v-for="item in layout"
+        :key="item.i"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+        :drag-ignore-from="item.i === 'tech' ? 'a, button, .techstack-swipe' : 'a, button'"
+      >
         <component :is="
           item.i === 'about' ? AboutMeCard :
           item.i === 'weather' ? WeatherCard :
@@ -88,7 +104,8 @@ const margin: [number, number] = [16, 16]
           item.i === 'spotify' ? SpotifyCard :
           item.i === 'map' ? MapCard :
           ProjectCard
-        " />
+        " 
+        v-on="item.i === 'tech' ? { 'lock-grid-drag': setGridDragLocked } : {}"/>
       </grid-item>
     </grid-layout>
   </div>
@@ -96,25 +113,45 @@ const margin: [number, number] = [16, 16]
 </template>
 
 <style scoped>
-/* Placeholder (drop target) styling while dragging */
-:deep(.vue-grid-layout .vue-grid-placeholder) {
-  border-radius: 1rem; /* matches rounded-2xl */
+  /* Placeholder (drop target) styling while dragging */
+  :deep(.vue-grid-layout .vue-grid-placeholder) {
+    border-radius: 2rem;
   background: rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    /* Use deep, natural dark-grey shadows (Tailwind gray-900 tone) */
+    box-shadow:
+      0 26px 80px rgba(17, 24, 39, 0.52),
+      0 12px 32px rgba(17, 24, 39, 0.36),
+      0 2px 10px rgba(17, 24, 39, 0.24);
   transition: background 150ms ease, box-shadow 150ms ease;
 }
 
 /* Dark mode tweak for placeholder */
-:deep(.dark .vue-grid-layout .vue-grid-placeholder) {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-}
+  :deep(.dark .vue-grid-layout .vue-grid-placeholder) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    /* Slightly stronger in dark mode but still dark-grey, not pure black */
+    box-shadow:
+      0 28px 88px rgba(17, 24, 39, 0.66),
+      0 12px 34px rgba(17, 24, 39, 0.48),
+      0 2px 10px rgba(17, 24, 39, 0.30);
+  }
 
 /* Dragging item shadow and radius to match cards */
-:deep(.vue-grid-item.vue-grid-item-dragging) {
-  border-radius: 1rem; /* matches rounded-2xl */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
+  :deep(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) {
+    border-radius: 2rem;
+    /* Natural dark-grey stack for the moving card */
+    box-shadow:
+      0 28px 88px rgba(17, 24, 39, 0.58),
+      0 12px 34px rgba(17, 24, 39, 0.40),
+      0 2px 10px rgba(17, 24, 39, 0.26);
+  }
+
+  :deep(.dark .vue-grid-item.vue-grid-item-dragging, .dark .vue-grid-item.vue-draggable-dragging) {
+    border-radius: 2rem;
+    box-shadow:
+      0 30px 92px rgba(17, 24, 39, 0.70),
+      0 14px 38px rgba(17, 24, 39, 0.52),
+      0 2px 12px rgba(17, 24, 39, 0.32);
+  }
 </style>
