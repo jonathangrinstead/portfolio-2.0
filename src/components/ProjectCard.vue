@@ -52,6 +52,6 @@
 <script setup lang="ts">
 import { Brain, Maximize2, X } from 'lucide-vue-next'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog'
+import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 </script>

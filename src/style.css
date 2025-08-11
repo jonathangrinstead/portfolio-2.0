@@ -115,25 +115,36 @@
 
 .glass-card {
   position: relative;
-  background: transparent !important;
-  backdrop-filter: blur(20px) saturate(110%);
-  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  /* Apple-like liquid glass base: semi-translucent gradient on light, clear on dark */
+  background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.62),
+      rgba(255, 255, 255, 0.38)
+    ) !important;
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  /* Crisp frost border with inner highlight */
+  border: 1px solid rgba(255, 255, 255, 0.55);
   overflow: hidden;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.06),
-    inset 0 1px 2px rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+    0 14px 46px rgba(16, 24, 40, 0.10),
+    0 6px 18px rgba(16, 24, 40, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(16, 24, 40, 0.04);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
   transform-style: preserve-3d;
 }
 
 .dark .glass-card {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02) !important;
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+    0 18px 56px rgba(0, 0, 0, 0.40),
+    0 8px 22px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Subtle Cursor-Reactive Frosted Effect */
@@ -143,9 +154,16 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: 
-    radial-gradient(circle at var(--cursor-x) var(--cursor-y), rgba(255, 255, 255, 0.08) 0%, transparent 50%);
-  mix-blend-mode: overlay;
+  /* Lens-like soft hotspot that follows the cursor */
+  background:
+    radial-gradient(
+      240px 240px at var(--cursor-x) var(--cursor-y),
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.16) 35%,
+      rgba(255, 255, 255, 0.06) 55%,
+      transparent 75%
+    );
+  mix-blend-mode: screen;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -157,49 +175,65 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-  mix-blend-mode: overlay;
-  opacity: 0.4;
+  /* Subtle perimeter sheen using gradient + mask to keep only the edge */
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.10)) border-box;
+  -webkit-mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px; /* controls ring thickness */
+  opacity: 0.85;
   transition: opacity 0.3s ease;
 }
 
 /* Subtle Hover Effects - Frosted Glass */
 .glass-card:hover {
-  backdrop-filter: blur(20px) saturate(130%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border-color: rgba(255, 255, 255, 0.70);
+  box-shadow:
+    0 20px 64px rgba(16, 24, 40, 0.14),
+    0 10px 28px rgba(16, 24, 40, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .dark .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 /* Subtle cursor reactivity on hover - Light mode with blue/purple refraction */
 .glass-card:hover::before {
-  opacity: 0.4;
-  background: 
-    radial-gradient(circle at var(--cursor-x) var(--cursor-y), 
-      rgba(59, 130, 246, 0.25) 0%,
-      rgba(139, 92, 246, 0.18) 20%, 
-      rgba(255, 255, 255, 0.12) 35%,
-      transparent 50%);
+  opacity: 0.6;
+  /* Cool blue/purple refraction hint */
+  background:
+    radial-gradient(
+      260px 260px at var(--cursor-x) var(--cursor-y),
+      rgba(59, 130, 246, 0.28) 0%,
+      rgba(139, 92, 246, 0.18) 26%,
+      rgba(255, 255, 255, 0.16) 46%,
+      transparent 70%
+    );
   transition: opacity 0.2s ease;
 }
 
 /* Dark mode with matching spread and intensity */
 .dark .glass-card:hover::before {
-  opacity: 0.4;
-  background: 
-    radial-gradient(circle at var(--cursor-x) var(--cursor-y), 
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0.18) 20%, 
-      rgba(255, 255, 255, 0.12) 35%,
-      transparent 50%);
+  opacity: 0.45;
+  background:
+    radial-gradient(
+      240px 240px at var(--cursor-x) var(--cursor-y),
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.18) 28%,
+      rgba(255, 255, 255, 0.12) 48%,
+      transparent 70%
+    );
 }
 
 .glass-card:hover::after {
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* Cursor-Reactive Liquid Glass */
@@ -210,15 +244,19 @@
 
 /* Enhanced Frosted Glass Variant (Optional) */
 .glass-card.frosted-enhanced {
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(20px) saturate(130%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.70),
+      rgba(255, 255, 255, 0.44)
+    ) !important;
+  backdrop-filter: blur(30px) saturate(160%);
+  -webkit-backdrop-filter: blur(30px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 }
 
 .dark .glass-card.frosted-enhanced {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 @layer base {
@@ -238,5 +276,21 @@
   a[role="button"],
   .glass-card [data-clickable="true"] {
     cursor: pointer;
+  }
+
+  /* Draggable cards: show grab/grabbing cursors on cards within grid items */
+  :is(.vue-grid-item) .glass-card {
+    cursor: grab !important;
+  }
+  :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) .glass-card {
+    cursor: grabbing !important;
+  }
+
+  /* Draggable map: apply the same grab/grabbing cursors to the map container */
+  :is(.vue-grid-item) #map {
+    cursor: grab !important;
+  }
+  :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) #map {
+    cursor: grabbing !important;
   }
 }
