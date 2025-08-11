@@ -96,7 +96,7 @@ const userWeatherIcon = computed<string>(() => {
 const getHomeWeather = async () => {
   try {
     isFetching.value = true
-    const response = await fetch('http://localhost:3001/api/weather?city=London')
+    const response = await fetch('/api/weather?city=London')
     const data = await response.json()
     homeWeatherData.value = data
     if ((data as any)?.name) homeLabel.value = (data as any).name
@@ -117,7 +117,7 @@ const getUserWeather = async (): Promise<void> => {
     })
     const lat = position.coords.latitude.toString()
     const lon = position.coords.longitude.toString()
-    const response = await fetch(`http://localhost:3001/api/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)
+    const response = await fetch(`/api/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`)
     const data = await response.json()
     userWeatherData.value = data
     userLabel.value = (data as any)?.name || 'Your location'

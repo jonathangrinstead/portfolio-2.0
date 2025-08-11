@@ -81,7 +81,7 @@ import { Card } from '@/components/ui/card'
 import { useFetch } from '@vueuse/core'
 import { computed } from 'vue'
 
-const { data: rawData, error, isFetching } = useFetch('http://localhost:3001/api/spotify')
+const { data: rawData, error, isFetching } = useFetch('/api/spotify')
 
 // Parse the JSON string into an object
 const data = computed(() => {

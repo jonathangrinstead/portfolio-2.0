@@ -58,7 +58,7 @@ const fetchQuote = async () => {
     const startedAt = Date.now();
     try {
         isLoading.value = true;
-        const response = await fetch('http://localhost:3001/api/quotes');
+        const response = await fetch('/api/quotes');
         const data = await response.json();
         quote.value = data.quote;
         author.value = data.author;
