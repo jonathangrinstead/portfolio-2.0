@@ -52,4 +52,3 @@ module.exports = async function handler(_req, res) {
   }
 }
 
-
