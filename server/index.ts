@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 const Nodefetch = require('node-fetch');
 const mapboxgl = require('mapbox-gl');
 
-dotenv.config({ path: '.env' });
+// Load env from project root if present
+dotenv.config({ path: require('path').resolve(__dirname, '../.env') });
 
 const app = express();
 app.use(cors());
