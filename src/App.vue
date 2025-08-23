@@ -16,32 +16,68 @@ import MapCard from './components/MapCard.vue'
 import ProjectCard from './components/ProjectCard.vue'
 import { useLiquidGlass } from './composables/useLiquidGlass'
 import { GridLayout, GridItem } from 'vue3-grid-layout'
-import { ref } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
+import { useBreakpoints } from '@vueuse/core'
 
 // Initialize liquid glass cursor tracking
 useLiquidGlass()
 
-const layout = ref([
-  // Top row widths remain equal; increase vertical room for About and Light
+// Desktop layout (>= lg)
+const desktopLayout = [
   { x: 0,  y: 0,  w: 3, h: 3, i: 'about' },
   { x: 3,  y: 0,  w: 3, h: 3, i: 'weather' },
   { x: 6,  y: 0,  w: 3, h: 3, i: 'light' },
   { x: 9,  y: 0,  w: 3, h: 3, i: 'map' },
 
-  // Second row starts at y:3 to align below top row
   { x: 0,  y: 3,  w: 6, h: 4, i: 'tech' },
-  { x: 6,  y: 3,  w: 6, h: 4, i: 'quotes' },
+  { x: 6,  y: 3,  w: 3, h: 3, i: 'cv' },
+  { x: 9,  y: 3,  w: 3, h: 3, i: 'spotify' },
 
-  // Third row
   { x: 0,  y: 7,  w: 3, h: 3, i: 'linkedin' },
   { x: 3,  y: 7,  w: 3, h: 3, i: 'github' },
-  { x: 6,  y: 7,  w: 3, h: 3, i: 'cv' },
-  { x: 9,  y: 7,  w: 3, h: 3, i: 'spotify' },
+  { x: 6,  y: 7,  w: 6, h: 4, i: 'quotes' },
 
-  // Bottom large: Snake (shifted accordingly)
   { x: 0,  y: 10, w: 7, h: 6, i: 'snake' },
   { x: 7,  y: 10, w: 5, h: 6, i: 'project' },
-])
+]
+
+// Tablet layout (sm..lg)
+const tabletLayout = [
+  { x: 0,  y: 0,  w: 5, h: 3, i: 'about' },
+  { x: 5,  y: 0,  w: 5, h: 3, i: 'weather' },
+  { x: 0,  y: 3,  w: 5, h: 3, i: 'light' },
+  { x: 5,  y: 3,  w: 5, h: 3, i: 'map' },
+
+  { x: 0,  y: 6,  w: 5, h: 4, i: 'tech' },
+  { x: 5,  y: 6,  w: 5, h: 4, i: 'quotes' },
+
+  { x: 0,  y: 10, w: 5, h: 3, i: 'linkedin' },
+  { x: 5,  y: 10, w: 5, h: 3, i: 'github' },
+  { x: 0,  y: 13, w: 5, h: 3, i: 'cv' },
+  { x: 5,  y: 13, w: 5, h: 3, i: 'spotify' },
+
+  { x: 0,  y: 16, w: 6, h: 6, i: 'snake' },
+  { x: 6,  y: 16, w: 4, h: 6, i: 'project' },
+]
+
+// Mobile layout (< sm) — hide snake and CV; light and spotify full-width
+const mobileLayout = [
+  { x: 0, y: 0,  w: 2, h: 3, i: 'about' },
+  { x: 0, y: 3,  w: 2, h: 3, i: 'light' },
+  { x: 0, y: 6,  w: 2, h: 3, i: 'weather' },
+  { x: 0, y: 9,  w: 2, h: 3, i: 'map' },
+
+  { x: 0, y: 12, w: 2, h: 4, i: 'tech' },
+  { x: 0, y: 16, w: 2, h: 4, i: 'quotes' },
+
+  { x: 0, y: 20, w: 1, h: 3, i: 'linkedin' },
+  { x: 1, y: 20, w: 1, h: 3, i: 'github' },
+  { x: 0, y: 23, w: 2, h: 3, i: 'spotify' },
+
+  { x: 0, y: 26, w: 2, h: 6, i: 'project' },
+]
+
+const layout = ref(desktopLayout)
 
 const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }
 const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
@@ -53,6 +89,18 @@ const isGridDragLocked = ref(false)
 function setGridDragLocked(locked: boolean) {
   isGridDragLocked.value = locked
 }
+
+// Responsive handling
+const bp = useBreakpoints(breakpoints)
+const isMobile = bp.smaller('sm')
+const isTablet = bp.between('sm', 'lg')
+const isGridDraggable = computed(() => !isGridDragLocked.value && !isMobile.value)
+
+watchEffect(() => {
+  layout.value = isMobile.value
+    ? mobileLayout
+    : (isTablet.value ? tabletLayout : desktopLayout)
+})
 </script>
 
 <template>
@@ -71,7 +119,7 @@ function setGridDragLocked(locked: boolean) {
       v-model:layout="layout"
       :col-num="cols.lg"
       :row-height="rowHeight"
-      :is-draggable="!isGridDragLocked"
+      :is-draggable="isGridDraggable"
       :is-resizable="false"
       :responsive="true"
       draggable-cancel=".techstack-swipe"
@@ -79,7 +127,7 @@ function setGridDragLocked(locked: boolean) {
       :cols="cols"
       :margin="margin"
       :use-css-transforms="true"
-      class="px-6"
+      class="px-6 pb-12"
     >
       <grid-item
         v-for="item in layout"

@@ -23,29 +23,29 @@
           >
             <!-- Top left: First letter + icon -->
             <div class="absolute top-2 left-2 flex flex-col items-center">
-              <span class="text-xs font-bold mb-1" :style="{ color: card.color }">
+              <span class="text-xs font-bold mb-1" :style="{ color: textColor(card) }">
                 {{ card.name.charAt(0).toUpperCase() }}
               </span>
-              <img :src="card.icon" class="w-4 h-4" :alt="card.name + ' icon'" />
+              <i :class="deviconClass(card)" class="text-[16px]"></i>
             </div>
             
             <!-- Top right: icon only -->
-            <img :src="card.icon" class="w-6 h-6 absolute top-4 right-4" :alt="card.name + ' icon'" />
+            <i :class="deviconClass(card)" class="text-[24px] absolute top-4 right-4 leading-none"></i>
             
             <!-- Bottom left: icon only -->
-            <img :src="card.icon" class="w-6 h-6 absolute bottom-4 left-4" :alt="card.name + ' icon'" />
+            <i :class="deviconClass(card)" class="text-[24px] absolute bottom-4 left-4 leading-none"></i>
             
             <!-- Bottom right: First letter + icon (upside down) -->
             <div class="absolute bottom-2 right-2 flex flex-col items-center transform rotate-180">
-              <span class="text-xs font-bold mb-1" :style="{ color: card.color }">
+              <span class="text-xs font-bold mb-1" :style="{ color: textColor(card) }">
                 {{ card.name.charAt(0).toUpperCase() }}
               </span>
-              <img :src="card.icon" class="w-4 h-4" :alt="card.name + ' icon'" />
+              <i :class="deviconClass(card)" class="text-[16px] leading-none"></i>
             </div>
 
             <!-- Center content -->
-            <img :src="card.icon" :alt="card.name" class="w-16 h-16 mb-4" />
-            <h2 class="text-2xl font-bold" :style="{ color: card.color }">{{ card.name }}</h2>
+            <i :class="deviconClass(card)" class="text-[64px] mb-4 leading-none"></i>
+            <h2 class="text-2xl font-bold" :style="{ color: textColor(card) }">{{ card.name }}</h2>
           </div>
         </TransitionGroup>
       </div>
@@ -54,26 +54,43 @@
   
   <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useColorMode } from '@vueuse/core'
   import { Card } from '@/components/ui/card'
 
 const emit = defineEmits<{
   (e: 'lock-grid-drag', locked: boolean): void
 }>()
   
-  const cards = [
-    { name: 'Ruby', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg', color: '#CC342D' },
-    { name: 'Vue', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg', color: '#42b883' },
-    { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', color: '#3776AB' },
-    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', color: '#f7df1e' },
-    { name: 'Rails', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-plain.svg', color: '#CC0000' },
-    { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', color: '#000000' },
-    { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', color: '#092E20' },
-    { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', color: '#EE4C2C' },
-    { name: 'Sass', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg', color: '#CD6799' },
-    { name: 'Tailwind', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', color: '#38B2AC' },
-    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', color: '#007396' },
-    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: '#3178C6' },
+  type CardItem = { name: string; key: string; color: string; variant?: 'plain' | 'original' }
+
+  const cards: CardItem[] = [
+    { name: 'Ruby', key: 'ruby', color: '#CC342D' },
+    { name: 'Vue', key: 'vuejs', color: '#42b883' },
+    { name: 'Python', key: 'python', color: '#3776AB' },
+    { name: 'JavaScript', key: 'javascript', color: '#f7df1e' },
+    { name: 'Rails', key: 'rails', color: '#CC0000' },
+    { name: 'Flask', key: 'flask', color: '#000000', variant: 'original' },
+    { name: 'Django', key: 'django', color: '#092E20' },
+    { name: 'PyTorch', key: 'pytorch', color: '#EE4C2C', variant: 'original' },
+    { name: 'Sass', key: 'sass', color: '#CD6799' },
+    { name: 'Tailwind', key: 'tailwindcss', color: '#06B6D4' },
+    { name: 'Java', key: 'java', color: '#007396' },
+    { name: 'TypeScript', key: 'typescript', color: '#3178C6' },
   ]
+
+  const mode = useColorMode()
+
+  function textColor(card: CardItem): string {
+    return mode.value === 'dark' ? '#ffffff' : card.color
+  }
+
+  function deviconClass(card: CardItem): string[] {
+    // Use 'plain' (inherits text color) by default; fall back to 'original' for specific icons.
+    const variant = card.variant ?? 'plain'
+    const classes = [`devicon-${card.key}-${variant}`]
+    if (mode.value === 'light') classes.push('colored')
+    return classes
+  }
   
   const currentIndex = ref(0)
   const dragOffset = ref(0)
@@ -170,4 +187,9 @@ const emit = defineEmits<{
     transform: translateX(-100%);
     opacity: 0;
   }
+  /* Make devicon SVGs appear white in dark mode while keeping color in light */
+  .dark :deep(.tech-icon) {
+    filter: brightness(0) invert(1);
+  }
+  
   </style>
