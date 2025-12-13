@@ -104,7 +104,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="container mx-auto mt-8">
+  <div class="container mx-auto mt-8 mb-8">
     <div class="flex justify-between items-center p-6">
       <div class="flex flex-col gap-2">
         <TitleName />
