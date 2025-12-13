@@ -89,8 +89,6 @@ const addMarkersToMap = () => {
     new mapboxgl.Marker({ element: customMarker, anchor: 'center' })
         .setLngLat([trafalgarSquare[0], trafalgarSquare[1]])
         .addTo(map);
-        
-    console.log('Marker added at coordinates:', trafalgarSquare);
 };
 
 const handleZoomIn = () => {
