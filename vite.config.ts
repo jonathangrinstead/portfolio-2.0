@@ -37,16 +37,12 @@ export default defineConfig({
             return 'ui'
           }
 
-          // Vue + core reactive utilities.
-          if (
-            id.includes('/vue/') ||
-            id.includes('@vueuse') ||
-            id.includes('vue-router')
-          ) {
-            return 'vue'
-          }
-
-          return 'vendor'
+          // IMPORTANT: avoid forcing Vue itself into a dedicated chunk.
+          // In some cases this can create cross-chunk circular execution order issues in production
+          // (e.g. "can't access lexical declaration before initialization").
+          //
+          // Let Rollup decide the rest.
+          return
         },
       },
     },
