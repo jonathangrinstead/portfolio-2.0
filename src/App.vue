@@ -137,7 +137,11 @@ watchEffect(() => {
         :w="item.w"
         :h="item.h"
         :i="item.i"
-        :drag-ignore-from="item.i === 'tech' ? 'a, button, .techstack-swipe' : 'a, button'"
+        :drag-ignore-from="
+          item.i === 'tech'
+            ? 'a, button, .techstack-swipe'
+            : (item.i === 'github' ? 'a, button, .github-graph' : 'a, button')
+        "
       >
         <component :is="
           item.i === 'about' ? AboutMeCard :
