@@ -35,15 +35,16 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { useColorMode } from '@vueuse/core';
-import mapboxgl from 'mapbox-gl';
+import type { Map, LngLatLike } from 'mapbox-gl';
 import memojiFavi from '@/assets/memoji_favi.png';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5ncmluc3RlYWQxOTk3IiwiYSI6ImNscTNwcGQ4MTBlOXUya3FubG85N2pjYmYifQ.4C2iTaUiNYuzlunMfJAZrw'
 const lightStyle = 'mapbox://styles/jonathangrinstead1997/cmdagm7j1007501r1ajpa5l8t';
 const darkStyle = 'mapbox://styles/jonathangrinstead1997/cmdagjf5v04sq01sd0hrq4t58';
 
-let map: mapboxgl.Map | null = null;
+let map: Map | null = null;
 let resizeObserver: ResizeObserver | null = null;
+let stopModeWatch: (() => void) | null = null;
+let destroyed = false;
 const mode = useColorMode();
 
 // Trafalgar Square coordinates
@@ -58,7 +59,7 @@ const updateMapStyle = () => {
         map.once('styledata', () => {
             addMarkersToMap();
             // Ensure camera recenters on Trafalgar Square after style load
-            map && map.setCenter(trafalgarSquare as mapboxgl.LngLatLike);
+            map && map.setCenter(trafalgarSquare as LngLatLike);
         });
     }
 };
@@ -86,6 +87,9 @@ const addMarkersToMap = () => {
     `;
 
     // Add the custom marker anchored at the center
+    // Marker constructor is provided by mapbox-gl runtime (loaded in initMap)
+    const mapboxgl = (map as any)._mapboxgl as any;
+    if (!mapboxgl?.Marker) return;
     new mapboxgl.Marker({ element: customMarker, anchor: 'center' })
         .setLngLat([trafalgarSquare[0], trafalgarSquare[1]])
         .addTo(map);
@@ -96,7 +100,7 @@ const handleZoomIn = () => {
     map.easeTo({
         zoom: map.getZoom() + 1,
         duration: 300,
-        center: trafalgarSquare as mapboxgl.LngLatLike,
+        center: trafalgarSquare as LngLatLike,
     });
 };
 
@@ -105,16 +109,19 @@ const handleZoomOut = () => {
     map.easeTo({
         zoom: map.getZoom() - 1,
         duration: 300,
-        center: trafalgarSquare as mapboxgl.LngLatLike,
+        center: trafalgarSquare as LngLatLike,
     });
 };
 
-onMounted(async () => {
-    await nextTick();
-    
+const initMap = async () => {
+    // Dynamically import Mapbox to keep initial bundle lighter
+    const mod = await import('mapbox-gl');
+    const mapboxgl = mod.default;
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5ncmluc3RlYWQxOTk3IiwiYSI6ImNscTNwcGQ4MTBlOXUya3FubG85N2pjYmYifQ.4C2iTaUiNYuzlunMfJAZrw'
+
     // Initialize map with current color mode
     const initialStyle = mode.value === 'dark' ? darkStyle : lightStyle;
-    
+
     map = new mapboxgl.Map({
         container: 'map',
         style: initialStyle,
@@ -123,24 +130,27 @@ onMounted(async () => {
         interactive: false,
         center: [trafalgarSquare[0], trafalgarSquare[1]], // Set initial center
         zoom: 13 // Set initial zoom
-    });
+    }) as unknown as Map;
+
+    // Store runtime constructors for marker creation without a top-level import
+    ;(map as any)._mapboxgl = mapboxgl;
 
     // Add markers after map loads
-    map.on('load', () => {
+    (map as any).on('load', () => {
         if (map) {
-            map.resize();
+            (map as any).resize();
             addMarkersToMap();
-            map.setCenter(trafalgarSquare as mapboxgl.LngLatLike);
+            map.setCenter(trafalgarSquare as LngLatLike);
         }
     });
 
     // Keep centered on window resizes
-    map.on('resize', () => {
-        map && map.setCenter(trafalgarSquare as mapboxgl.LngLatLike);
+    (map as any).on('resize', () => {
+        map && map.setCenter(trafalgarSquare as LngLatLike);
     });
 
-    // Watch for color mode changes
-    watch(mode, () => {
+    // Watch for color mode changes (store stop handle for cleanup)
+    stopModeWatch = watch(mode, () => {
         updateMapStyle();
     });
 
@@ -148,16 +158,49 @@ onMounted(async () => {
     const container = document.getElementById('map');
     if (container) {
         resizeObserver = new ResizeObserver(() => {
-            map && map.resize();
+            map && (map as any).resize();
         });
         resizeObserver.observe(container);
+    }
+}
+
+onMounted(async () => {
+    await nextTick();
+
+    // Defer Mapbox initialization to idle time to improve initial load/TTI
+    const run = async () => {
+        if (destroyed) return;
+        try {
+            await initMap();
+        } catch (e) {
+            console.error('Failed to init map:', e);
+        }
+    }
+
+    if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(run, { timeout: 1200 });
+    } else {
+        setTimeout(run, 250);
     }
 });
 
 onUnmounted(() => {
+    destroyed = true;
+    if (stopModeWatch) {
+        stopModeWatch();
+        stopModeWatch = null;
+    }
     if (resizeObserver) {
         resizeObserver.disconnect();
         resizeObserver = null;
+    }
+    if (map) {
+        try {
+            (map as any).remove?.();
+        } catch {
+            // ignore
+        }
+        map = null;
     }
 });
 </script>

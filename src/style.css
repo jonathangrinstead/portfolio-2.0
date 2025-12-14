@@ -136,6 +136,36 @@
   transform-style: preserve-3d;
 }
 
+/* Performance: reduce heavy blur/shadows on touch/coarse pointers */
+@media (hover: none), (pointer: coarse) {
+  .glass-card {
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    box-shadow:
+      0 10px 32px rgba(16, 24, 40, 0.10),
+      0 4px 12px rgba(16, 24, 40, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    transition: none;
+  }
+
+  .glass-card:hover {
+    transform: none;
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    box-shadow:
+      0 10px 32px rgba(16, 24, 40, 0.10),
+      0 4px 12px rgba(16, 24, 40, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+
+  .glass-card::before,
+  .glass-card::after,
+  .glass-card:hover::before,
+  .glass-card:hover::after {
+    opacity: 0 !important;
+  }
+}
+
 .dark .glass-card {
   background: rgba(255, 255, 255, 0.02) !important;
   backdrop-filter: blur(18px) saturate(120%);
@@ -292,5 +322,21 @@
   }
   :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) #map {
     cursor: grabbing !important;
+  }
+}
+
+/* Site-wide perf + accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glass-card,
+  .glass-card:hover {
+    transition: none !important;
+    transform: none !important;
   }
 }
