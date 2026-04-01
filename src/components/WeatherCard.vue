@@ -77,9 +77,17 @@ const weatherIcons: Record<string, string> = {
 const homeWeatherData = ref<WeatherApi | null>(null)
 const userWeatherData = ref<WeatherApi | null>(null)
 const isFetching = ref(false)
+const homeError = ref(false)
 const isFlipped = ref(false)
 const homeLabel = ref('London')
 const userLabel = ref('Your location')
+
+const homeTemp = computed(() => homeWeatherData.value ? Math.round(homeWeatherData.value.main.temp - 273.15) : null)
+const homeFeelsLike = computed(() => homeWeatherData.value ? Math.round(homeWeatherData.value.main.feels_like - 273.15) : null)
+const homeWind = computed(() => homeWeatherData.value ? Math.round(homeWeatherData.value.wind.speed * 2.237) : null)
+const userTemp = computed(() => userWeatherData.value ? Math.round(userWeatherData.value.main.temp - 273.15) : null)
+const userFeelsLike = computed(() => userWeatherData.value ? Math.round(userWeatherData.value.main.feels_like - 273.15) : null)
+const userWind = computed(() => userWeatherData.value ? Math.round(userWeatherData.value.wind.speed * 2.237) : null)
 
 const homeWeatherIcon = computed<string>(() => {
   if (!homeWeatherData.value) return new URL('@/assets/weatherIcons/cloudy.svg', import.meta.url).href
@@ -96,12 +104,14 @@ const userWeatherIcon = computed<string>(() => {
 const getHomeWeather = async () => {
   try {
     isFetching.value = true
+    homeError.value = false
     const response = await fetch('/api/weather?city=London')
     const data = await response.json()
     homeWeatherData.value = data
     if ((data as any)?.name) homeLabel.value = (data as any).name
   } catch (error) {
     console.error('Failed to fetch weather:', error)
+    homeError.value = true
   } finally {
     isFetching.value = false
   }
@@ -158,16 +168,19 @@ onMounted(() => {
           <CardContent>
             <div v-if="homeWeatherData" class="space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-2xl font-bold">{{ Math.round(homeWeatherData.main.temp - 273.15) }}°C</span>
-                <span class="text-sm text-muted-foreground">Feels like {{ Math.round(homeWeatherData.main.feels_like - 273.15) }}°C</span>
+                <span class="text-2xl font-bold">{{ homeTemp }}°C</span>
+                <span class="text-sm text-muted-foreground">Feels like {{ homeFeelsLike }}°C</span>
               </div>
               <div class="space-y-1">
                 <p class="capitalize text-sm">{{ homeWeatherData.weather[0].description }}</p>
                 <div class="flex items-center gap-4 text-sm text-muted-foreground">
                   <span>Humidity: {{ homeWeatherData.main.humidity }}%</span>
-                  <span>Wind: {{ Math.round(homeWeatherData.wind.speed * 2.237) }} mph</span>
+                  <span>Wind: {{ homeWind }} mph</span>
                 </div>
               </div>
+            </div>
+            <div v-else-if="homeError" class="flex items-center justify-center h-24">
+              <p class="text-sm text-red-500 dark:text-red-400">Weather unavailable</p>
             </div>
             <div v-else class="flex items-center justify-center h-24">
               <p class="text-muted-foreground">Loading weather data...</p>
@@ -186,14 +199,14 @@ onMounted(() => {
           <CardContent>
             <div v-if="userWeatherData" class="space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-2xl font-bold">{{ Math.round(userWeatherData.main.temp - 273.15) }}°C</span>
-                <span class="text-sm text-muted-foreground">Feels like {{ Math.round(userWeatherData.main.feels_like - 273.15) }}°C</span>
+                <span class="text-2xl font-bold">{{ userTemp }}°C</span>
+                <span class="text-sm text-muted-foreground">Feels like {{ userFeelsLike }}°C</span>
               </div>
               <div class="space-y-1">
                 <p class="capitalize text-sm">{{ userWeatherData.weather[0].description }}</p>
                 <div class="flex items-center gap-4 text-sm text-muted-foreground">
                   <span>Humidity: {{ userWeatherData.main.humidity }}%</span>
-                  <span>Wind: {{ Math.round(userWeatherData.wind.speed * 2.237) }} mph</span>
+                  <span>Wind: {{ userWind }} mph</span>
                 </div>
               </div>
             </div>

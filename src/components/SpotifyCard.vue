@@ -48,6 +48,8 @@
                 v-if="track.albumImage"
                 :src="track.albumImage"
                 :alt="track.album"
+                loading="lazy"
+                decoding="async"
                 class="h-full w-full rounded-2xl object-cover shadow-md ring-1 ring-border/60"
               />
               <div
