@@ -150,11 +150,15 @@
   
     if (willEat) {
       score.value++
-      // Place new food; simple placement (may rarely spawn on the snake)
-      food.value = {
-        x: Math.floor(Math.random() * GRID_SIZE),
-        y: Math.floor(Math.random() * GRID_SIZE),
-      }
+      // Place new food, retrying until it lands on an empty cell
+      let newFood: { x: number; y: number }
+      do {
+        newFood = {
+          x: Math.floor(Math.random() * GRID_SIZE),
+          y: Math.floor(Math.random() * GRID_SIZE),
+        }
+      } while (snake.value.some((s) => s.x === newFood.x && s.y === newFood.y))
+      food.value = newFood
     } else {
       snake.value.pop()
     }
