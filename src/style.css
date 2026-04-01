@@ -308,20 +308,32 @@
     cursor: pointer;
   }
 
-  /* Draggable cards: show grab/grabbing cursors on cards within grid items */
-  :is(.vue-grid-item) .glass-card {
-    cursor: grab !important;
-  }
-  :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) .glass-card {
-    cursor: grabbing !important;
-  }
+  /* Draggable cards: show grab/grabbing cursors on non-touch devices only */
+  @media (hover: hover) and (pointer: fine) {
+    :is(.vue-grid-item) .glass-card {
+      cursor: grab !important;
+    }
+    :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) .glass-card {
+      cursor: grabbing !important;
+    }
 
-  /* Draggable map: apply the same grab/grabbing cursors to the map container */
-  :is(.vue-grid-item) #map {
-    cursor: grab !important;
+    /* Draggable map: apply the same grab/grabbing cursors to the map container */
+    :is(.vue-grid-item) #map {
+      cursor: grab !important;
+    }
+    :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) #map {
+      cursor: grabbing !important;
+    }
   }
-  :is(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) #map {
-    cursor: grabbing !important;
+}
+
+/* Fix mobile scrolling: vue3-grid-layout sets touch-action:none on every
+   grid item, which blocks page scrolling even when dragging is disabled.
+   Restore normal touch behaviour on devices that don't support hover
+   (i.e. touch screens) so users can scroll over cards. */
+@media (hover: none), (pointer: coarse) {
+  .vue-grid-item {
+    touch-action: auto !important;
   }
 }
 
