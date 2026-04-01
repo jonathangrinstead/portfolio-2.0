@@ -79,7 +79,7 @@
               <blockquote class="reveal rd3 mt-8 max-w-md mx-auto border-l-4 border-blue-500/40 pl-4 text-left italic text-muted-foreground">
                 "After fully tearing my ACL during sport, I waited more than six weeks following my MRI scan before receiving an official diagnosis through the NHS."
               </blockquote>
-              <p class="reveal rd4 text-sm text-muted-foreground/60 mt-4">— The motivation behind this project</p>
+              <p class="reveal rd4 text-sm text-muted-foreground/60 mt-4">- The motivation behind this project</p>
             </div>
           </div>
 
@@ -88,7 +88,7 @@
             <div class="slide-inner">
               <h2 class="reveal text-3xl sm:text-4xl font-bold">What is an <span class="text-blue-500">ACL</span>?</h2>
               <p class="reveal rd1 text-muted-foreground mt-2 max-w-lg mx-auto">
-                The Anterior Cruciate Ligament — a critical stabiliser inside your knee
+                The Anterior Cruciate Ligament - a critical stabiliser inside your knee
               </p>
               <div class="reveal rd2 mt-8 flex justify-center">
                 <div class="knee-diagram">
@@ -104,7 +104,7 @@
                 <div class="stat-pill"><span class="text-2xl">⛷️</span><span class="text-[10px] text-muted-foreground">Skiing</span></div>
               </div>
               <p class="reveal rd4 text-sm text-muted-foreground/70 mt-6 max-w-md mx-auto">
-                70–80% of ACL tears happen <strong>without contact</strong> — sudden stops, pivots, or bad landings
+                70-80% of ACL tears happen <strong>without contact</strong> - sudden stops, pivots, or bad landings
               </p>
             </div>
           </div>
@@ -134,7 +134,7 @@
                 </div>
               </div>
               <p class="reveal rd3 text-sm text-muted-foreground mt-6 max-w-md mx-auto">
-                Each MRI study captures the knee from <strong>3 different angles</strong> — the model processes all three for a complete picture
+                Each MRI study captures the knee from <strong>3 different angles</strong> - the model processes all three for a complete picture
               </p>
               <div class="reveal rd4 mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium">
                 <Database class="w-4 h-4" />
@@ -205,7 +205,7 @@
           <div v-else-if="slide === 6" key="s6" class="slide">
             <div class="slide-inner">
               <h2 class="reveal text-3xl sm:text-4xl font-bold">The <span class="text-blue-500">Prototype</span></h2>
-              <p class="reveal rd1 text-muted-foreground mt-2 max-w-lg mx-auto">Beyond just a model — a working clinical interface</p>
+              <p class="reveal rd1 text-muted-foreground mt-2 max-w-lg mx-auto">Beyond just a model - a working clinical interface</p>
               <div class="reveal rd2 mt-8 proto-flow">
                 <div class="proto-step">
                   <div class="proto-icon"><Upload class="w-6 h-6" /></div>
@@ -222,7 +222,7 @@
                 <div class="proto-step">
                   <div class="proto-icon"><CheckCircle2 class="w-6 h-6" /></div>
                   <span class="text-sm font-medium">Result</span>
-                  <span class="text-[10px] text-muted-foreground">In 1–2 seconds</span>
+                  <span class="text-[10px] text-muted-foreground">In 1-2 seconds</span>
                 </div>
               </div>
               <div class="reveal rd3 mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-blue-600/10 border border-blue-500/20">
@@ -243,7 +243,7 @@
             <div class="slide-inner">
               <h2 class="reveal text-3xl sm:text-4xl font-bold">What's <span class="acl-gradient">Next</span></h2>
               <div class="reveal rd1 mt-8 max-w-md mx-auto space-y-4 text-left">
-                <div class="insight-row"><CheckCircle2 class="w-5 h-5 text-green-500 shrink-0" /><span>Strong on clear-cut tears — <strong>91.67% accuracy</strong></span></div>
+                <div class="insight-row"><CheckCircle2 class="w-5 h-5 text-green-500 shrink-0" /><span>Strong on clear-cut tears - <strong>91.67% accuracy</strong></span></div>
                 <div class="insight-row"><AlertTriangle class="w-5 h-5 text-yellow-500 shrink-0" /><span>Struggles with subtle or partial tears</span></div>
                 <div class="insight-row"><Shield class="w-5 h-5 text-blue-500 shrink-0" /><span>Best used as a <strong>clinical aide</strong>, not a replacement</span></div>
                 <div class="insight-row"><TrendingUp class="w-5 h-5 text-purple-500 shrink-0" /><span>More data + 3D models = even better accuracy</span></div>
