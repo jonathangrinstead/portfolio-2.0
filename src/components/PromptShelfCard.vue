@@ -10,8 +10,8 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
     <a
       :href="downloadUrl"
       download
-      aria-label="Download PromptShelf for macOS"
-      title="Download PromptShelf"
+      aria-label="Download the unsigned PromptShelf preview for macOS"
+      title="Download unsigned preview"
       class="absolute right-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-white/60
              bg-white/80 text-black shadow-md backdrop-blur transition-all duration-200
              hover:scale-105 hover:rotate-3 hover:bg-white
@@ -68,7 +68,7 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
       </div>
 
       <div class="mt-auto flex items-center justify-between pt-3 text-xs text-muted-foreground">
-        <span>Native · Local · Markdown</span>
+        <span>Unsigned preview</span>
         <span class="font-medium text-foreground/70">macOS 13+</span>
       </div>
     </div>

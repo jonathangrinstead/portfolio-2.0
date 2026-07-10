@@ -6,4 +6,6 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 ## PromptShelf download
 
-Set `VITE_PROMPTSHELF_DOWNLOAD_URL` in Vercel to the URL of the signed and notarized `PromptShelf.dmg` release. If the environment variable is omitted, the portfolio tile uses `/downloads/PromptShelf.dmg`.
+The v1 portfolio download is stored at `public/downloads/PromptShelf.dmg`. It is an unsigned universal preview build, so first-time users must approve it from macOS System Settings > Privacy & Security.
+
+Set `VITE_PROMPTSHELF_DOWNLOAD_URL` in Vercel to override the bundled download when a signed and notarized release becomes available.
