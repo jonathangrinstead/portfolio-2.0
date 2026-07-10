@@ -14,6 +14,7 @@ import CVCard from './components/CVCard.vue'
 import SpotifyCard from './components/SpotifyCard.vue'
 import MapCard from './components/MapCard.vue'
 import ProjectCard from './components/ProjectCard.vue'
+import PromptShelfCard from './components/PromptShelfCard.vue'
 import { useLiquidGlass } from './composables/useLiquidGlass'
 import { GridLayout, GridItem } from 'vue3-grid-layout'
 import { ref, computed, watchEffect } from 'vue'
@@ -35,7 +36,8 @@ const desktopLayout = [
 
   { x: 0,  y: 7,  w: 3, h: 3, i: 'linkedin' },
   { x: 3,  y: 7,  w: 3, h: 3, i: 'github' },
-  { x: 6,  y: 7,  w: 6, h: 4, i: 'quotes' },
+  { x: 6,  y: 7,  w: 3, h: 4, i: 'quotes' },
+  { x: 9,  y: 7,  w: 3, h: 4, i: 'promptshelf' },
 
   { x: 0,  y: 10, w: 7, h: 6, i: 'snake' },
   { x: 7,  y: 10, w: 5, h: 6, i: 'project' },
@@ -48,8 +50,9 @@ const tabletLayout = [
   { x: 0,  y: 3,  w: 5, h: 3, i: 'light' },
   { x: 5,  y: 3,  w: 5, h: 3, i: 'map' },
 
-  { x: 0,  y: 6,  w: 5, h: 4, i: 'tech' },
-  { x: 5,  y: 6,  w: 5, h: 4, i: 'quotes' },
+  { x: 0,  y: 6,  w: 4, h: 4, i: 'tech' },
+  { x: 4,  y: 6,  w: 3, h: 4, i: 'quotes' },
+  { x: 7,  y: 6,  w: 3, h: 4, i: 'promptshelf' },
 
   { x: 0,  y: 10, w: 5, h: 3, i: 'linkedin' },
   { x: 5,  y: 10, w: 5, h: 3, i: 'github' },
@@ -69,12 +72,13 @@ const mobileLayout = [
 
   { x: 0, y: 12, w: 2, h: 4, i: 'tech' },
   { x: 0, y: 16, w: 2, h: 4, i: 'quotes' },
+  { x: 0, y: 20, w: 2, h: 4, i: 'promptshelf' },
 
-  { x: 0, y: 20, w: 1, h: 3, i: 'linkedin' },
-  { x: 1, y: 20, w: 1, h: 3, i: 'github' },
-  { x: 0, y: 23, w: 2, h: 3, i: 'spotify' },
+  { x: 0, y: 24, w: 1, h: 3, i: 'linkedin' },
+  { x: 1, y: 24, w: 1, h: 3, i: 'github' },
+  { x: 0, y: 27, w: 2, h: 3, i: 'spotify' },
 
-  { x: 0, y: 26, w: 2, h: 6, i: 'project' },
+  { x: 0, y: 30, w: 2, h: 6, i: 'project' },
 ]
 
 const layout = ref(desktopLayout)
@@ -150,6 +154,7 @@ watchEffect(() => {
           item.i === 'snake' ? SnakeCard :
           item.i === 'tech' ? TechStackCard :
           item.i === 'quotes' ? QuotesCard :
+          item.i === 'promptshelf' ? PromptShelfCard :
           item.i === 'linkedin' ? LinkedinCard :
           item.i === 'github' ? GitHubCard :
           item.i === 'cv' ? CVCard :
