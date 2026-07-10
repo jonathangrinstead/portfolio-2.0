@@ -22,8 +22,8 @@
                         <p class="text-xs text-muted-foreground">Tap refresh to try again.</p>
                     </div>
                     <div v-else :key="quote">
-                        <CardTitle class="text-2xl font-serif italic">"{{ quote }}"</CardTitle>
-                        <CardDescription class="text-right mt-4">- {{ author }}</CardDescription>
+                        <CardTitle class="text-lg leading-snug font-serif italic sm:text-xl">"{{ quote }}"</CardTitle>
+                        <CardDescription class="text-right mt-3 text-xs">- {{ author }}</CardDescription>
                     </div>
                 </Transition>
             </div>
