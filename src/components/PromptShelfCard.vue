@@ -7,8 +7,6 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
 
 <template>
   <Card class="promptshelf-card glass-card group relative h-full w-full overflow-hidden">
-    <div class="promptshelf-glow" aria-hidden="true" />
-
     <div class="relative z-10 flex h-full flex-col p-5">
       <div class="flex items-start justify-between gap-3">
         <div>
@@ -23,7 +21,12 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
           download
           aria-label="Download PromptShelf for macOS"
           title="Download PromptShelf"
-          class="download-button"
+          class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/60
+                 bg-white/80 text-black shadow-md backdrop-blur transition-all duration-200
+                 hover:scale-105 hover:rotate-3 hover:bg-white
+                 focus:outline-none focus:ring-2 focus:ring-black/20
+                 dark:border-white/30 dark:bg-black/60 dark:text-white
+                 dark:hover:bg-black/70 dark:focus:ring-white/20"
         >
           <Download class="h-5 w-5" />
         </a>
@@ -75,46 +78,6 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
 <style scoped>
 .promptshelf-card {
   isolation: isolate;
-}
-
-.promptshelf-glow {
-  position: absolute;
-  inset: auto -15% -35% 18%;
-  height: 70%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(52, 199, 89, 0.22), transparent 68%);
-  filter: blur(22px);
-  transition: transform 400ms ease, opacity 400ms ease;
-}
-
-.group:hover .promptshelf-glow {
-  opacity: 0.9;
-  transform: translateY(-8px) scale(1.08);
-}
-
-.download-button {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.58);
-  border-radius: 999px;
-  color: white;
-  background: #1f9d4c;
-  box-shadow: 0 8px 20px rgba(31, 157, 76, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
-}
-
-.download-button:hover {
-  background: #16863d;
-  box-shadow: 0 10px 24px rgba(31, 157, 76, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transform: translateY(-1px);
-}
-
-.download-button:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
 }
 
 .app-preview {
@@ -260,8 +223,6 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .promptshelf-glow,
-  .download-button,
   .app-preview {
     transition: none;
   }
