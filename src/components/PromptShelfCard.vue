@@ -7,22 +7,22 @@ const downloadUrl = import.meta.env.VITE_PROMPTSHELF_DOWNLOAD_URL || '/downloads
 
 <template>
   <Card class="promptshelf-card glass-card group relative h-full w-full overflow-hidden">
-    <div class="relative z-10 flex h-full flex-col p-5">
-      <a
-        :href="downloadUrl"
-        download
-        aria-label="Download PromptShelf for macOS"
-        title="Download PromptShelf"
-        class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-white/60
-               bg-white/80 text-black shadow-md backdrop-blur transition-all duration-200
-               hover:scale-105 hover:rotate-3 hover:bg-white
-               focus:outline-none focus:ring-2 focus:ring-black/20
-               dark:border-white/30 dark:bg-black/60 dark:text-white
-               dark:hover:bg-black/70 dark:focus:ring-white/20"
-      >
-        <Download class="h-5 w-5" />
-      </a>
+    <a
+      :href="downloadUrl"
+      download
+      aria-label="Download PromptShelf for macOS"
+      title="Download PromptShelf"
+      class="absolute right-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-white/60
+             bg-white/80 text-black shadow-md backdrop-blur transition-all duration-200
+             hover:scale-105 hover:rotate-3 hover:bg-white
+             focus:outline-none focus:ring-2 focus:ring-black/20
+             dark:border-white/30 dark:bg-black/60 dark:text-white
+             dark:hover:bg-black/70 dark:focus:ring-white/20"
+    >
+      <Download class="h-5 w-5" />
+    </a>
 
+    <div class="relative z-10 flex h-full flex-col p-5">
       <div class="pr-12">
         <div>
           <CardDescription class="mb-1 text-xs font-medium uppercase tracking-widest">
