@@ -104,16 +104,16 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="container mx-auto mt-8 mb-8">
-    <div class="flex justify-between items-center p-6">
-      <div class="flex flex-col gap-2">
+  <div class="site-shell container mx-auto">
+    <header class="site-header">
+      <div class="min-w-0 flex flex-col gap-1.5">
         <TitleName />
         <JobName />
       </div>
-      <div class='pb-4'>
+      <div class="shrink-0">
         <Contact />
       </div>
-    </div>
+    </header>
 
     <grid-layout
       v-model:layout="layout"
@@ -127,7 +127,7 @@ watchEffect(() => {
       :cols="cols"
       :margin="margin"
       :use-css-transforms="true"
-      class="px-6 pb-12"
+      class="portfolio-grid px-4 pb-12 sm:px-6"
     >
       <grid-item
         v-for="item in layout"
@@ -165,6 +165,26 @@ watchEffect(() => {
 </template>
 
 <style scoped>
+  .site-shell {
+    margin-block: clamp(1rem, 3vw, 2rem);
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  @media (max-width: 479px) {
+    .site-header {
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding-inline: 1.5rem;
+    }
+  }
+
   /* Placeholder (drop target) styling while dragging */
   :deep(.vue-grid-layout .vue-grid-placeholder) {
     border-radius: 2rem;
@@ -192,6 +212,7 @@ watchEffect(() => {
 /* Dragging item shadow and radius to match cards */
   :deep(.vue-grid-item.vue-grid-item-dragging, .vue-grid-item.vue-draggable-dragging) {
     border-radius: 2rem;
+    opacity: 0.92;
     /* Natural dark-grey stack for the moving card */
     box-shadow:
       0 28px 88px rgba(17, 24, 39, 0.58),
@@ -205,5 +226,9 @@ watchEffect(() => {
       0 30px 92px rgba(17, 24, 39, 0.70),
       0 14px 38px rgba(17, 24, 39, 0.52),
       0 2px 12px rgba(17, 24, 39, 0.32);
+  }
+
+  :deep(.vue-grid-item) {
+    touch-action: manipulation;
   }
 </style>

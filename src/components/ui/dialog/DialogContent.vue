@@ -68,30 +68,43 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 @keyframes project-expand-in {
   0% {
     opacity: 0;
-    transform: scale(0.94);
+    transform: scale(0.96);
+    filter: blur(8px);
   }
   100% {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0);
   }
 }
 @keyframes project-expand-out {
   0% {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0);
   }
   100% {
     opacity: 0;
-    transform: scale(0.94);
+    transform: scale(0.96);
+    filter: blur(8px);
   }
 }
 
 /* Apply custom expand/collapse animation when using .project-expand */
 .project-expand[data-state="open"] {
-  animation: project-expand-in 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: project-expand-in 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .project-expand[data-state="closed"] {
-  animation: project-expand-out 420ms cubic-bezier(0.4, 0, 1, 1);
+  animation: project-expand-out 400ms cubic-bezier(0.8, 0.2, 0.8, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-expand[data-state="open"],
+  .project-expand[data-state="closed"] {
+    animation-duration: 160ms !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 </style>
 

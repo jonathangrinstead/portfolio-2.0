@@ -1,40 +1,33 @@
-<script setup lang="ts">
-import { CalendarDays } from 'lucide-vue-next'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card'
-</script>
-
 <template>
-  <HoverCard>
-    <HoverCardTrigger>
-      <p class="text-lg">Full Stack Software Developer</p>
-    </HoverCardTrigger>
-    <HoverCardContent>
-      <p>Specialising in Ruby on Rails, Python and Vue.js</p>
-      <div class="flex items-center pt-2">
-        <CalendarDays class="mr-2 h-4 w-4 opacity-70" />
-        <span class="text-xs text-muted-foreground">
-          Currently at <a href="https://mmtm.io/" target="_blank" class="underline">mmtm</a> • Joined April 2025
-        </span>
-      </div>
-    </HoverCardContent>
-  </HoverCard>
+  <div class="role-lockup">
+    <p class="role">Full-stack software developer</p>
+    <p class="specialism">Ruby on Rails · Python · Vue.js</p>
+  </div>
 </template>
 
-
 <style scoped>
-p {
-  transition: all 0.3s ease;
-}
+  .role-lockup {
+    display: grid;
+    gap: 0.15rem;
+  }
 
-.text-lg:hover {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  cursor: pointer;
-}
+  .role {
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    font-weight: 570;
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+  }
+
+  .specialism {
+    color: var(--muted-foreground);
+    font-size: 0.78rem;
+    font-weight: 540;
+    letter-spacing: 0.015em;
+  }
+
+  @media (max-width: 479px) {
+    .specialism {
+      display: none;
+    }
+  }
 </style>

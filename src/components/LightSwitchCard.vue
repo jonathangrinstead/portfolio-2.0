@@ -39,7 +39,8 @@ onMounted(() => {
 <template>
   <Card class="h-full glass-card relative flex flex-col items-center p-8 shadow-lg">
     <div class="flex-1 w-full flex items-center justify-center">
-      <div
+      <button
+        type="button"
         class="w-24 h-24 rounded-full flex items-center justify-center border-4 cursor-pointer transition-all duration-500"
         :class="[
           mode === 'dark'
@@ -47,9 +48,8 @@ onMounted(() => {
             : 'bg-gray-200 border-gray-400'
         ]"
         @click="toggleMode"
-        aria-label="Toggle light and dark mode"
-        role="button"
-        tabindex="0"
+        :aria-label="`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`"
+        :aria-pressed="mode === 'dark'"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ onMounted(() => {
             d="M12 3c-3.5 0-6 2.5-6 5.5 0 2.3 1.8 4.3 3.3 5.5h5.4c1.5-1.2 3.3-3.2 3.3-5.5C18 5.5 15.5 3 12 3zM9 19h6M10 22h4"
           />
         </svg>
-      </div>
+      </button>
     </div>
 
     <div class="w-full mt-6">
@@ -93,27 +93,8 @@ onMounted(() => {
   </template>
   
   <style scoped>
-@keyframes flicker {
-  0%, 100% {
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(255, 237, 74, 0.5));
-  }
-  30% {
-    opacity: 0.9;
-    filter: drop-shadow(0 0 5px rgba(255, 237, 74, 0.4));
-  }
-  60% {
-    opacity: 1;
-    filter: drop-shadow(0 0 10px rgba(255, 237, 74, 0.6));
-  }
-  80% {
-    opacity: 0.95;
-    filter: drop-shadow(0 0 6px rgba(255, 237, 74, 0.5));
-  }
-}
-
 .flicker {
-  animation: flicker 2s infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 237, 74, 0.58));
 }
 
 /* Liquid glass-esque slider shell */

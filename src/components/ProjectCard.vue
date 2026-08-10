@@ -14,10 +14,10 @@
           <CardDescription class="text-base">A machine learning approach to diagnosing ACL injuries</CardDescription>
         </div>
       </div>
-      <DialogTrigger class="absolute bottom-4 right-4">
+      <DialogTrigger as-child>
         <button
           aria-label="Open project details"
-          class="p-2 rounded-full border backdrop-blur shadow-md transition-all duration-200
+          class="absolute bottom-4 right-4 p-2 rounded-full border backdrop-blur shadow-md transition-all duration-200
                  bg-white/80 text-black border-white/60 hover:bg-white hover:scale-105 hover:rotate-3
                  focus:outline-none focus:ring-2 focus:ring-black/20
                  dark:bg-black/60 dark:text-white dark:border-white/30 dark:hover:bg-black/70 dark:focus:ring-white/20"
