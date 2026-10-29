@@ -20,7 +20,7 @@ async function reveal(destination: boolean) {
   if (destination) world.value?.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true })
   else {
     window.scrollTo(0, previousScroll)
-    const trigger = previousFocus?.isConnected ? previousFocus : document.getElementById('retro-trigger')
+    const trigger = document.getElementById('retro-trigger') ?? (previousFocus?.isConnected ? previousFocus : null)
     trigger?.focus({ preventScroll: true })
   }
 }
