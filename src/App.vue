@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import RetroCard from './components/RetroCard.vue'
+import RetroPortal from './components/RetroPortal.vue'
 import Contact from './components/Contact.vue'
 import TitleName from './components/TitleName.vue'
 import JobName from './components/JobName.vue'
@@ -29,16 +31,17 @@ const desktopLayout = [
   { x: 6,  y: 0,  w: 3, h: 3, i: 'light' },
   { x: 9,  y: 0,  w: 3, h: 3, i: 'map' },
 
-  { x: 0,  y: 3,  w: 6, h: 4, i: 'tech' },
-  { x: 6,  y: 3,  w: 3, h: 3, i: 'cv' },
-  { x: 9,  y: 3,  w: 3, h: 3, i: 'spotify' },
+  { x: 0, y: 3, w: 6, h: 3, i: 'retro' },
+  { x: 0,  y: 6,  w: 6, h: 4, i: 'tech' },
+  { x: 6,  y: 6,  w: 3, h: 3, i: 'cv' },
+  { x: 9,  y: 6,  w: 3, h: 3, i: 'spotify' },
 
-  { x: 0,  y: 7,  w: 3, h: 3, i: 'linkedin' },
-  { x: 3,  y: 7,  w: 3, h: 3, i: 'github' },
-  { x: 6,  y: 7,  w: 6, h: 4, i: 'quotes' },
+  { x: 0,  y: 10,  w: 3, h: 3, i: 'linkedin' },
+  { x: 3,  y: 10,  w: 3, h: 3, i: 'github' },
+  { x: 6,  y: 10,  w: 6, h: 4, i: 'quotes' },
 
-  { x: 0,  y: 10, w: 7, h: 6, i: 'snake' },
-  { x: 7,  y: 10, w: 5, h: 6, i: 'project' },
+  { x: 0,  y: 13, w: 7, h: 6, i: 'snake' },
+  { x: 7,  y: 13, w: 5, h: 6, i: 'project' },
 ]
 
 // Tablet layout (sm..lg)
@@ -48,34 +51,39 @@ const tabletLayout = [
   { x: 0,  y: 3,  w: 5, h: 3, i: 'light' },
   { x: 5,  y: 3,  w: 5, h: 3, i: 'map' },
 
-  { x: 0,  y: 6,  w: 5, h: 4, i: 'tech' },
-  { x: 5,  y: 6,  w: 5, h: 4, i: 'quotes' },
+  { x: 0, y: 6, w: 5, h: 3, i: 'retro' },
+  { x: 0,  y: 9,  w: 5, h: 4, i: 'tech' },
+  { x: 5,  y: 9,  w: 5, h: 4, i: 'quotes' },
 
-  { x: 0,  y: 10, w: 5, h: 3, i: 'linkedin' },
-  { x: 5,  y: 10, w: 5, h: 3, i: 'github' },
-  { x: 0,  y: 13, w: 5, h: 3, i: 'cv' },
-  { x: 5,  y: 13, w: 5, h: 3, i: 'spotify' },
+  { x: 0,  y: 13, w: 5, h: 3, i: 'linkedin' },
+  { x: 5,  y: 13, w: 5, h: 3, i: 'github' },
+  { x: 0,  y: 16, w: 5, h: 3, i: 'cv' },
+  { x: 5,  y: 16, w: 5, h: 3, i: 'spotify' },
 
-  { x: 0,  y: 16, w: 6, h: 6, i: 'snake' },
-  { x: 6,  y: 16, w: 4, h: 6, i: 'project' },
+  { x: 0,  y: 19, w: 6, h: 6, i: 'snake' },
+  { x: 6,  y: 19, w: 4, h: 6, i: 'project' },
 ]
 
 // Mobile layout (< sm) — hide snake and CV; light and spotify full-width
 const mobileLayout = [
   { x: 0, y: 0,  w: 2, h: 3, i: 'about' },
-  { x: 0, y: 3,  w: 2, h: 3, i: 'light' },
-  { x: 0, y: 6,  w: 2, h: 3, i: 'weather' },
-  { x: 0, y: 9,  w: 2, h: 3, i: 'map' },
+  { x: 0, y: 3, w: 2, h: 3, i: 'retro' },
+  { x: 0, y: 6,  w: 2, h: 3, i: 'light' },
+  { x: 0, y: 9,  w: 2, h: 3, i: 'weather' },
+  { x: 0, y: 12,  w: 2, h: 3, i: 'map' },
 
-  { x: 0, y: 12, w: 2, h: 4, i: 'tech' },
-  { x: 0, y: 16, w: 2, h: 4, i: 'quotes' },
+  { x: 0, y: 15, w: 2, h: 4, i: 'tech' },
+  { x: 0, y: 19, w: 2, h: 4, i: 'quotes' },
 
-  { x: 0, y: 20, w: 1, h: 3, i: 'linkedin' },
-  { x: 1, y: 20, w: 1, h: 3, i: 'github' },
-  { x: 0, y: 23, w: 2, h: 3, i: 'spotify' },
+  { x: 0, y: 23, w: 1, h: 3, i: 'linkedin' },
+  { x: 1, y: 23, w: 1, h: 3, i: 'github' },
+  { x: 0, y: 26, w: 2, h: 3, i: 'spotify' },
 
-  { x: 0, y: 26, w: 2, h: 6, i: 'project' },
+  { x: 0, y: 29, w: 2, h: 6, i: 'project' },
 ]
+
+const retroPortal = ref<InstanceType<typeof RetroPortal>>()
+const enterRetro = () => retroPortal.value?.enter()
 
 const layout = ref(desktopLayout)
 
@@ -104,6 +112,7 @@ watchEffect(() => {
 </script>
 
 <template>
+  <RetroPortal ref="retroPortal">
   <div class="container mx-auto mt-8 mb-8">
     <div class="flex justify-between items-center p-6">
       <div class="flex flex-col gap-2">
@@ -144,6 +153,7 @@ watchEffect(() => {
         "
       >
         <component :is="
+          item.i === 'retro' ? RetroCard :
           item.i === 'about' ? AboutMeCard :
           item.i === 'weather' ? WeatherCard :
           item.i === 'light' ? LightSwitchCard :
@@ -157,11 +167,11 @@ watchEffect(() => {
           item.i === 'map' ? MapCard :
           ProjectCard
         " 
-        v-on="(item.i === 'tech' || item.i === 'light') ? { 'lock-grid-drag': setGridDragLocked } : {}"/>
+        v-on="item.i === 'retro' ? { activate: enterRetro } : (item.i === 'tech' || item.i === 'light') ? { 'lock-grid-drag': setGridDragLocked } : {}"/>
       </grid-item>
     </grid-layout>
   </div>
-  
+  </RetroPortal>
 </template>
 
 <style scoped>
