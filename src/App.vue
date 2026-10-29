@@ -26,60 +26,51 @@ useLiquidGlass()
 
 // Desktop layout (>= lg)
 const desktopLayout = [
-  { x: 0,  y: 0,  w: 3, h: 3, i: 'about' },
-  { x: 3,  y: 0,  w: 3, h: 3, i: 'weather' },
-  { x: 6,  y: 0,  w: 3, h: 3, i: 'light' },
-  { x: 9,  y: 0,  w: 3, h: 3, i: 'map' },
-
-  { x: 0, y: 3, w: 6, h: 3, i: 'retro' },
-  { x: 0,  y: 6,  w: 6, h: 4, i: 'tech' },
-  { x: 6,  y: 6,  w: 3, h: 3, i: 'cv' },
-  { x: 9,  y: 6,  w: 3, h: 3, i: 'spotify' },
-
-  { x: 0,  y: 10,  w: 3, h: 3, i: 'linkedin' },
-  { x: 3,  y: 10,  w: 3, h: 3, i: 'github' },
-  { x: 6,  y: 10,  w: 6, h: 4, i: 'quotes' },
-
-  { x: 0,  y: 13, w: 7, h: 6, i: 'snake' },
-  { x: 7,  y: 13, w: 5, h: 6, i: 'project' },
+  { x: 0, y: 0, w: 3, h: 3, i: 'about' },
+  { x: 3, y: 0, w: 3, h: 3, i: 'weather' },
+  { x: 6, y: 0, w: 3, h: 3, i: 'light' },
+  { x: 9, y: 0, w: 3, h: 3, i: 'map' },
+  { x: 0, y: 3, w: 6, h: 3, i: 'tech' },
+  { x: 6, y: 3, w: 3, h: 3, i: 'cv' },
+  { x: 9, y: 3, w: 3, h: 3, i: 'spotify' },
+  { x: 0, y: 6, w: 3, h: 3, i: 'linkedin' },
+  { x: 3, y: 6, w: 3, h: 3, i: 'github' },
+  { x: 6, y: 6, w: 3, h: 3, i: 'quotes' },
+  { x: 9, y: 6, w: 3, h: 3, i: 'retro' },
+  { x: 0, y: 9, w: 6, h: 6, i: 'snake' },
+  { x: 6, y: 9, w: 6, h: 6, i: 'project' },
 ]
 
 // Tablet layout (sm..lg)
 const tabletLayout = [
-  { x: 0,  y: 0,  w: 5, h: 3, i: 'about' },
-  { x: 5,  y: 0,  w: 5, h: 3, i: 'weather' },
-  { x: 0,  y: 3,  w: 5, h: 3, i: 'light' },
-  { x: 5,  y: 3,  w: 5, h: 3, i: 'map' },
-
-  { x: 0, y: 6, w: 5, h: 3, i: 'retro' },
-  { x: 0,  y: 9,  w: 5, h: 4, i: 'tech' },
-  { x: 5,  y: 9,  w: 5, h: 4, i: 'quotes' },
-
-  { x: 0,  y: 13, w: 5, h: 3, i: 'linkedin' },
-  { x: 5,  y: 13, w: 5, h: 3, i: 'github' },
-  { x: 0,  y: 16, w: 5, h: 3, i: 'cv' },
-  { x: 5,  y: 16, w: 5, h: 3, i: 'spotify' },
-
-  { x: 0,  y: 19, w: 6, h: 6, i: 'snake' },
-  { x: 6,  y: 19, w: 4, h: 6, i: 'project' },
+  { x: 0, y: 0, w: 5, h: 3, i: 'about' },
+  { x: 5, y: 0, w: 5, h: 3, i: 'weather' },
+  { x: 0, y: 3, w: 5, h: 3, i: 'light' },
+  { x: 5, y: 3, w: 5, h: 3, i: 'map' },
+  { x: 0, y: 6, w: 5, h: 4, i: 'tech' },
+  { x: 5, y: 6, w: 5, h: 4, i: 'quotes' },
+  { x: 0, y: 10, w: 5, h: 3, i: 'linkedin' },
+  { x: 5, y: 10, w: 5, h: 3, i: 'github' },
+  { x: 0, y: 13, w: 5, h: 3, i: 'cv' },
+  { x: 5, y: 13, w: 5, h: 3, i: 'spotify' },
+  { x: 0, y: 16, w: 10, h: 2, i: 'retro' },
+  { x: 0, y: 18, w: 5, h: 6, i: 'snake' },
+  { x: 5, y: 18, w: 5, h: 6, i: 'project' },
 ]
 
 // Mobile layout (< sm) — hide snake and CV; light and spotify full-width
 const mobileLayout = [
-  { x: 0, y: 0,  w: 2, h: 3, i: 'about' },
-  { x: 0, y: 3, w: 2, h: 3, i: 'retro' },
-  { x: 0, y: 6,  w: 2, h: 3, i: 'light' },
-  { x: 0, y: 9,  w: 2, h: 3, i: 'weather' },
-  { x: 0, y: 12,  w: 2, h: 3, i: 'map' },
-
-  { x: 0, y: 15, w: 2, h: 4, i: 'tech' },
-  { x: 0, y: 19, w: 2, h: 4, i: 'quotes' },
-
-  { x: 0, y: 23, w: 1, h: 3, i: 'linkedin' },
-  { x: 1, y: 23, w: 1, h: 3, i: 'github' },
-  { x: 0, y: 26, w: 2, h: 3, i: 'spotify' },
-
-  { x: 0, y: 29, w: 2, h: 6, i: 'project' },
+  { x: 0, y: 0, w: 2, h: 3, i: 'about' },
+  { x: 0, y: 3, w: 2, h: 3, i: 'light' },
+  { x: 0, y: 6, w: 2, h: 3, i: 'weather' },
+  { x: 0, y: 9, w: 2, h: 3, i: 'map' },
+  { x: 0, y: 12, w: 2, h: 4, i: 'tech' },
+  { x: 0, y: 16, w: 2, h: 4, i: 'quotes' },
+  { x: 0, y: 20, w: 1, h: 3, i: 'linkedin' },
+  { x: 1, y: 20, w: 1, h: 3, i: 'github' },
+  { x: 0, y: 23, w: 2, h: 2, i: 'retro' },
+  { x: 0, y: 25, w: 2, h: 3, i: 'spotify' },
+  { x: 0, y: 28, w: 2, h: 6, i: 'project' },
 ]
 
 const retroPortal = ref<InstanceType<typeof RetroPortal>>()
@@ -88,7 +79,6 @@ const enterRetro = () => retroPortal.value?.enter()
 const layout = ref(desktopLayout)
 
 const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }
-const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }
 const rowHeight = 80
 const margin: [number, number] = [16, 16]
 
@@ -102,6 +92,7 @@ function setGridDragLocked(locked: boolean) {
 const bp = useBreakpoints(breakpoints)
 const isMobile = bp.smaller('sm')
 const isTablet = bp.between('sm', 'lg')
+const gridColumns = computed(() => isMobile.value ? 2 : isTablet.value ? 10 : 12)
 const isGridDraggable = computed(() => !isGridDragLocked.value && !isMobile.value)
 
 watchEffect(() => {
@@ -126,14 +117,12 @@ watchEffect(() => {
 
     <grid-layout
       v-model:layout="layout"
-      :col-num="cols.lg"
+      :col-num="gridColumns"
       :row-height="rowHeight"
       :is-draggable="isGridDraggable"
       :is-resizable="false"
-      :responsive="true"
+      :responsive="false"
       draggable-cancel=".techstack-swipe"
-      :breakpoints="breakpoints"
-      :cols="cols"
       :margin="margin"
       :use-css-transforms="true"
       class="px-6 pb-12"
