@@ -1,5 +1,5 @@
 <template>
-    <Card class="glass-card w-full h-full flex flex-col relative">
+    <Card class="quote-card glass-card w-full h-full flex flex-col relative">
         <!-- Refresh button in top-right corner -->
         <button
             aria-label="Refresh quote"
@@ -14,7 +14,7 @@
             <RefreshCw class="w-5 h-5" :class="{ 'rotate-360': isLoading }" />
         </button>
 
-        <CardHeader class="flex-grow overflow-y-auto pr-12">
+        <CardHeader class="quote-content" tabindex="0" role="region" aria-label="Programming quote">
             <div class="min-h-0">
                 <Transition name="fade" mode="out-in">
                     <div v-if="error" :key="'error'" class="flex flex-col items-center justify-center h-full gap-1 text-center">
@@ -22,7 +22,7 @@
                         <p class="text-xs text-muted-foreground">Tap refresh to try again.</p>
                     </div>
                     <div v-else :key="quote">
-                        <CardTitle class="text-2xl font-serif italic">"{{ quote }}"</CardTitle>
+                        <CardTitle class="quote-text font-serif italic">"{{ quote }}"</CardTitle>
                         <CardDescription class="text-right mt-4">- {{ author }}</CardDescription>
                     </div>
                 </Transition>
@@ -72,6 +72,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.quote-card { container-type: inline-size; }
+.quote-content { flex: 1; min-height: 0; overflow-y: auto; padding: 36px 24px 0; }
+.quote-text { font-size: clamp(1.05rem, 4.4cqw, 1.5rem); line-height: 1.4; overflow-wrap: anywhere; }
+.quote-content:focus-visible { outline: 2px solid var(--ring); outline-offset: -4px; }
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s ease;

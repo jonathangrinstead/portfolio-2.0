@@ -1,10 +1,10 @@
 <template>
     <Card
-      class="glass-card w-full h-full p-6 flex flex-col items-center justify-center overflow-hidden select-none relative transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+      class="techstack-card glass-card w-full h-full p-6 flex flex-col items-center justify-center overflow-hidden select-none relative transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
     >
       <!-- Card View -->
       <div
-        class="relative w-72 h-96 cursor-grab transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] techstack-swipe"
+        class="relative techstack-deck cursor-grab transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] techstack-swipe"
         @mousedown.stop.prevent="startDrag"
         @mousemove.stop.prevent="onDrag"
         @mouseup.stop="endDrag"
@@ -175,6 +175,8 @@ const emit = defineEmits<{
   </script>
   
   <style scoped>
+  .techstack-card { container-type: size; }
+  .techstack-deck { width: min(72cqw, 63.75cqh, 240px); aspect-ratio: 3 / 4; flex-shrink: 0; }
   .slide-enter-active,
   .slide-leave-active {
     transition: transform 0.7s ease, opacity 0.7s ease;
