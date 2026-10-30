@@ -42,8 +42,8 @@ async function explore(destination: Destination) {
 </template>
 
 <style scoped>
-.retro-world { min-height: 100dvh; padding: clamp(45px, 12vh, 100px) 12px 35px; background: #000 url('/retro-stars.svg') repeat; color: #fff; font-family: 'Times New Roman', serif; letter-spacing: normal; }
-.universe { position: relative; width: min(560px,100%); height: 420px; margin: 0 auto 45px; }
+.retro-world { display: flex; flex-direction: column; justify-content: center; min-height: 100dvh; padding: 35px 12px; background: #000 url('/retro-stars.svg') repeat; color: #fff; font-family: 'Times New Roman', serif; letter-spacing: normal; }
+.universe { flex-shrink: 0; position: relative; width: min(560px,100%); height: 420px; margin: 0 auto 45px; }
 .world-logo { position: absolute; display: grid; place-items: center; width: 44%; top: 33%; left: 28%; margin: 0; }
 .destination { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 100px; min-height: 88px; border: 0; background: transparent; text-decoration: none; }
 .destination span { color: #e8ed69; text-transform: uppercase; font: bold 11px/1.2 'Times New Roman',serif; text-shadow: 1px 1px #4e4a1b; }
@@ -52,7 +52,7 @@ footer { text-align: center; color: #b58c8c; font-size: 11px; }footer button,foo
 button:focus-visible,a:focus-visible,h1:focus-visible,.info-window:focus-visible { outline: 1px dotted #ffff8b; outline-offset: 5px; }
 @media (hover:hover) { .destination:hover span,footer a:hover,footer button:hover { color: white; } }
 @media (max-width:480px) { .universe { height: 340px; margin-bottom: 35px; }.destination { width: 78px; }.destination :deep(canvas) { width: 54px; height: 54px; }.destination span { font-size: 10px; }.world-logo { width: 48%; left: 26%; top: 36%; }.about { left: 14%; }.projects { right: 13%; }.cv { left: 12%; }.contact { right: 10%; } }
-.info-window { max-width: 640px; margin: 25px auto 40px; border: 2px outset #8b7ea3; background: #151124; box-shadow: 6px 6px #000; scroll-margin: 20px; }
+.info-window { width: min(640px, 100%); flex-shrink: 0; max-width: 640px; margin: 25px auto 40px; border: 2px outset #8b7ea3; background: #151124; box-shadow: 6px 6px #000; scroll-margin: 20px; }
 .window-bar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; background: linear-gradient(90deg,#483875,#24204c); font-size: 11px; }
 .window-bar button { width: 25px; height: 25px; border: 2px outset #d7cde8; color: #211b30; background: #bdb2cc; font: bold 19px/1 monospace; }
 .window-content { padding: 26px; font: 15px/1.8 Georgia,serif; color: #d6cee5; }

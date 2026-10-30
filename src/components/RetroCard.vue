@@ -8,7 +8,7 @@ defineEmits<{ activate: [] }>()
   <Card class="glass-card retro-card h-full">
     <button id="retro-trigger" class="retro-link" aria-label="90s-ify: enter the retro portfolio" @click="$emit('activate')">
       <span class="television" aria-hidden="true"><span class="screen"><span class="year">1996</span><span class="stars">✦ · ✧</span></span><span class="stand"></span></span>
-      <span class="card-caption"><span><strong>90s-ify</strong><span class="description">Explore my retro website</span></span><span class="arrow"><ArrowUpRight :size="18" aria-hidden="true" /></span></span>
+      <span class="card-caption"><span><strong>90s-ify</strong></span><span class="arrow"><ArrowUpRight :size="18" aria-hidden="true" /></span></span>
     </button>
   </Card>
 </template>
@@ -22,7 +22,7 @@ defineEmits<{ activate: [] }>()
 .stars { position: absolute; inset: 0; display: grid; place-items: center; color: #c9f5ae; opacity: 0; transform: translateY(8px); font: 13px monospace; transition: transform 260ms cubic-bezier(.23,1,.32,1), opacity 200ms; }
 .stand { position: absolute; width: 40px; bottom: -9px; left: 28px; border-bottom: 2px solid var(--muted-foreground); }
 .card-caption { position: absolute; bottom: 22px; left: 24px; right: 22px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.card-caption strong { display: block; font-size: 18px; font-weight: 550; }.description { display: block; margin-top: 4px; color: var(--muted-foreground); font-size: 12px; }
+.card-caption strong { display: block; font-size: 18px; font-weight: 550; }
 .arrow { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; transition: transform 200ms, background 200ms; }
 .retro-link:focus-visible { outline: 2px solid var(--foreground); outline-offset: -6px; border-radius: inherit; }
 .retro-link:focus-visible .television { opacity: 1; border-color: #a4b990; transform: rotate(-5deg) scale(1.12); }
